@@ -1,0 +1,20 @@
+{
+  "name": "fontto-server",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.1",
+    "babel-runtime": "^6.20.0",
+    "fibers": "^2.0.0",
+    "material-ui": "^0.19.4",
+    "meteor-node-stubs": "~0.2.4",
+    "random-unicodes": "^1.0.3",
+    "randomstring": "^1.1.5",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
+    "react-tap-event-plugin": "^3.0.2"
+  }
+}
