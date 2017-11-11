@@ -15,6 +15,7 @@ export class Index extends Component {
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
+
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
@@ -25,15 +26,15 @@ export class Index extends Component {
     }
 
     updateWindowDimensions() {
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
+        this.setState({width: window.innerWidth, height: window.innerHeight});
     }
 
     render() {
 
         let stickyTop;
-        if(this.state.width < 768){
+        if (this.state.width < 768) {
             stickyTop = (64 - 36) / 2;
-        }else {
+        } else {
             stickyTop = (80 - 36) / 2;
         }
 
@@ -42,13 +43,21 @@ export class Index extends Component {
                 <Header rightContents={<Button label='로그인' isRaised={false}/>}/>
                 {/*<Button label='test' className='testButton'/>*/}
 
-                <div className='main-picture-wrapper'>
+                <div className='section-1'>
                     <img className='main-picture' src='/image/main-picture.jpg'/>
                     <Sticky className='make-font-button-sticky' enabled={true} top={stickyTop}
                             onStateChange={this.handleStateChange}>
                         <Button className='make-font-button' label='폰트만들기'/>
                     </Sticky>
-                    <div className='main-desc'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
+                    <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
+                </div>
+                <div className='section-2'>
+                    <div className='main-desc-2'>fontto는 딥러닝 기반<br/>폰트 제작 서비스입니다.</div>
+                    <div className='desc-image-wrapper'>
+                        <img className='desc-image' src='/image/desc-image-1.png'/>
+                        <img className='desc-image' src='/image/desc-image-2.png'/>
+                        <img className='desc-image' src='/image/desc-image-3.png'/>
+                    </div>
                 </div>
             </div>
         );

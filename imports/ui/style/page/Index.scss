@@ -2,23 +2,37 @@ $tablet: 768px;
 $mobile: 425px;
 
 $default-height: 80px;
-$default-image-height: 360px;
+$default-section-height: 500px;
 $default-content-width: 100px;
+
+@mixin main-desc($color) {
+  color: $color;
+  font-size: 2.5em;
+  z-index: 997;
+  @media (max-width: $tablet) {
+    font-size: 2em;
+  }
+  @media (max-width: $mobile) {
+    font-size: 1.5em;
+  }
+}
 
 .index {
   padding-top: $default-height;
   height: 3000px;
-
-  .main-picture-wrapper {
-    position: relative;
+  @media (max-width: $tablet) {
+    padding-top: $default-height/1.25;
   }
+}
 
-  .main-desc {
+.section-1 {
+  position: relative;
+
+  .main-desc-1 {
     position: absolute;
     top: 80px;
     left: 60px;
-    color: #fdfdfd;
-    font-size: 2.5em;
+    @include main-desc(#fdfdfd);
   }
 
   .make-font-button-sticky {
@@ -35,33 +49,75 @@ $default-content-width: 100px;
 
   .main-picture {
     width: 100%;
-    height: $default-image-height;
+    height: $default-section-height;
     object-fit: cover;
     filter: brightness(20%);
   }
 
   @media (max-width: $tablet) {
-    padding-top: $default-height/1.25;
     .main-picture {
-      height: $default-image-height/1.5;
+      height: $default-section-height/1.5;
     }
     .make-font-button-sticky {
       right: $default-content-width/1.5 + 25;
       width: 120px;
     }
-    .main-desc {
-      font-size: 2em;
+    .main-desc-1 {
       top: 60px;
       left: 40px;
     }
   }
 
   @media (max-width: $mobile) {
-    .main-desc {
-      font-size: 1.5em;
-    }
     .make-font-button-sticky {
       width: 96px;
+    }
+  }
+}
+
+.section-2 {
+  position: relative;
+  padding: 0;
+  border: 1px solid black;
+  //height: $default-section-height;
+
+  .main-desc-2 {
+    @include main-desc(#333);
+    height: auto;
+    font-weight: 600;
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    text-align: right;
+  }
+
+  .desc-image-wrapper {
+    height: auto;
+    width: 100%;
+    position: absolute;
+    top: 125px;
+    text-align: center;
+  }
+
+  .desc-image {
+    display: inline-block;
+    margin: -1% -1%;
+    width: 30%;
+    max-width: 350px;
+  }
+
+  @media (max-width: $tablet) {
+    height: $default-section-height/1.5;
+    .main-desc-2 {
+      top: 30px;
+      right: 40px;
+    }
+  }
+
+  @media(max-width: $mobile){
+    height: $default-section-height/0.55;
+    .desc-image {
+      width: 250px;
     }
   }
 }
