@@ -1,0 +1,27 @@
+$default-footer-height: 300px;
+
+.footer {
+  border: 1px solid black;
+  width: 100%;
+  height: $default-footer-height;
+  background-color: #333;
+  position: relative;
+
+  .left {
+    width: 44%;
+    position: absolute;
+    left: 3%;
+    top: 0;
+    height: $default-footer-height;
+    border: 1px solid red;
+  }
+
+  .right {
+    width: 44%;
+    position: absolute;
+    right: 3%;
+    top: 0;
+    height: $default-footer-height;
+    border: 1px solid red;
+  }
+}

@@ -2,7 +2,7 @@ $tablet: 768px;
 $mobile: 425px;
 
 $default-header-height: 80px;
-$default-footer-height: 200px;
+$default-footer-height: 300px;
 $default-section-height: 500px;
 $default-content-width: 100px;
 
@@ -20,9 +20,7 @@ $default-content-width: 100px;
 }
 
 .index {
-  height: 3000px;
   padding-top: $default-header-height;
-  padding-bottom: $default-footer-height;
   @media (max-width: $tablet) {
     padding-top: $default-header-height/1.25;
   }
@@ -105,7 +103,7 @@ $default-content-width: 100px;
     height: auto;
     width: 100%;
     position: absolute;
-    top: 125px;
+    top: 160px;
     text-align: center;
   }
 
@@ -117,7 +115,7 @@ $default-content-width: 100px;
   }
 
   @media (max-width: $tablet) {
-    height: $default-section-height/1.5;
+    height: $default-section-height/1.2;
     .main-desc-2 {
       top: 30px;
       right: 40px;
@@ -171,7 +169,7 @@ $default-content-width: 100px;
   }
 
   @media (max-width: $tablet) {
-    height: $default-section-height;
+    height: $default-section-height/0.9;
 
     .showcase-button-sticky {
       width: 120px;
@@ -192,7 +190,9 @@ $default-content-width: 100px;
     }
   }
   @media (max-width: $mobile) {
+    height: $default-section-height/1.1;
     .showcase-button-sticky {
+      top: 130px;
       width: 96px;
     }
   }
