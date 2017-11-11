@@ -1,0 +1,47 @@
+$tablet: 768px;
+
+$default-height: 80px;
+$default-content-width: 100px;
+$default-color: #333;
+
+.wrapper {
+  background-color: #fdfdfd;
+  filter: opacity(98%);
+  width: 100%;
+  height: $default-height;
+  position: fixed;
+  top: 0;
+  z-index: 998;
+
+  .logo {
+    height: $default-height;
+  }
+
+  .right-contents-wrapper {
+    position: absolute;
+    width: $default-content-width;
+    height: $default-height;
+    right: 10px;
+    top: 0;
+    display: table;
+
+    .contents {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      color: $default-color;
+    }
+  }
+
+  @media (max-width: $tablet) {
+    height: $default-height/1.25;
+
+    .logo, .right-contents-wrapper {
+      height: $default-height/1.25;
+    }
+
+    .right-contents-wrapper {
+      width: $default-content-width/1.25;
+    }
+  }
+}

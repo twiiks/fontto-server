@@ -13,8 +13,8 @@ import {Route, BrowserRouter, Switch} from 'react-router-dom';
 import {App} from '../../ui/App';
 
 // Pages
-import {Index} from '../../ui/pages/Index';
-import {Test} from '../../ui/pages/Test';
+import {Index} from '../../ui/page/Index';
+import {Test} from '../../ui/page/Test';
 
 
 Meteor.startup(() => {
