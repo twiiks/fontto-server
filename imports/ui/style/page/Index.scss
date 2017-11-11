@@ -78,8 +78,15 @@ $default-content-width: 100px;
 .section-2 {
   position: relative;
   padding: 0;
-  border: 1px solid black;
+  //border: 1px solid black;
   height: $default-section-height;
+
+  .desc-background {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: opacity(0.03);
+  }
 
   .main-desc-2 {
     @include main-desc(#333);

@@ -45,13 +45,13 @@ export class Index extends Component {
 
                 <div className='section-1'>
                     <img className='main-picture' src='/image/main-picture.jpg'/>
-                    <Sticky className='make-font-button-sticky' enabled={true} top={stickyTop}
-                            onStateChange={this.handleStateChange}>
+                    <Sticky className='make-font-button-sticky' enabled={true} top={stickyTop}>
                         <Button className='make-font-button' label='폰트만들기'/>
                     </Sticky>
                     <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
                 </div>
                 <div className='section-2'>
+                    <img className='desc-background' src='/image/desc-background.jpg'/>
                     <div className='main-desc-2'>fontto는 딥러닝 기반<br/>폰트 제작 서비스입니다.</div>
                     <div className='desc-image-wrapper'>
                         <img className='desc-image' src='/image/desc-image-1.png'/>
