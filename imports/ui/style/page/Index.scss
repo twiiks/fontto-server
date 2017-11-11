@@ -79,7 +79,7 @@ $default-content-width: 100px;
   position: relative;
   padding: 0;
   border: 1px solid black;
-  //height: $default-section-height;
+  height: $default-section-height;
 
   .main-desc-2 {
     @include main-desc(#333);
