@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Sticky from 'react-stickynode';
 
 import {Button} from '../component/Button';
-import {Header} from "../component/Header";
+import {Header} from '../component/Header';
+import {Footer} from '../component/Footer';
 
 import '../style/page/Index.scss'
 
@@ -50,6 +51,7 @@ export class Index extends Component {
                     </Sticky>
                     <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
                 </div>
+
                 <div className='section-2'>
                     <img className='desc-background' src='/image/desc-background.jpg'/>
                     <div className='main-desc-2'>fontto는 딥러닝 기반<br/>폰트 제작 서비스입니다.</div>
@@ -59,6 +61,20 @@ export class Index extends Component {
                         <img className='desc-image' src='/image/desc-image-3.png'/>
                     </div>
                 </div>
+
+                <div className='section-3'>
+                    <div className='main-desc-3'>다른 사람들이 제작한<br/>폰트를 구경해보세요.</div>
+                    <div className='example-image-wrapper'>
+                        <img className='example-image' src='/image/example-1.png'/>
+                        <img className='example-image' src='/image/example-2.png'/>
+                        <img className='example-image' src='/image/example-3.png'/>
+                    </div>
+                    <Sticky className='showcase-button-sticky' enabled={true} top={stickyTop}>
+                        <Button className='showcase-button' label='구경하기'/>
+                    </Sticky>
+                </div>
+
+                <Footer/>
             </div>
         );
     }

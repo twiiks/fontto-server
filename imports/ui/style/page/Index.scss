@@ -1,12 +1,14 @@
 $tablet: 768px;
 $mobile: 425px;
 
-$default-height: 80px;
+$default-header-height: 80px;
+$default-footer-height: 200px;
 $default-section-height: 500px;
 $default-content-width: 100px;
 
 @mixin main-desc($color) {
   color: $color;
+  font-weight: 600;
   font-size: 2.5em;
   z-index: 997;
   @media (max-width: $tablet) {
@@ -18,10 +20,11 @@ $default-content-width: 100px;
 }
 
 .index {
-  padding-top: $default-height;
   height: 3000px;
+  padding-top: $default-header-height;
+  padding-bottom: $default-footer-height;
   @media (max-width: $tablet) {
-    padding-top: $default-height/1.25;
+    padding-top: $default-header-height/1.25;
   }
 }
 
@@ -85,7 +88,7 @@ $default-content-width: 100px;
     height: 100%;
     width: 100%;
     object-fit: cover;
-    filter: opacity(0.03);
+    filter: opacity(0.035);
   }
 
   .main-desc-2 {
@@ -121,10 +124,77 @@ $default-content-width: 100px;
     }
   }
 
-  @media(max-width: $mobile){
+  @media(max-width: $mobile) {
     height: $default-section-height/0.55;
     .desc-image {
       width: 250px;
     }
   }
+}
+
+.section-3 {
+  height: $default-section-height/0.7;
+  position: relative;
+
+  .main-desc-3 {
+    @include main-desc(#333);
+    height: auto;
+    position: absolute;
+    top: 40px;
+    left: 60px;
+    text-align: left;
+  }
+
+  .example-image-wrapper {
+    position: absolute;
+    top: 180px;
+    text-align: right;
+  }
+
+  .example-image {
+    width: 80%;
+    max-width: 900px;
+    margin: 10px 0;
+  }
+
+  .showcase-button-sticky {
+    position: absolute;
+    top: 60px;
+    right: $default-content-width + 20;
+    z-index: 999;
+    width: 200px;
+  }
+
+  .showcase-button {
+    width: 100%;
+    position: absolute;
+  }
+
+  @media (max-width: $tablet) {
+    height: $default-section-height;
+
+    .showcase-button-sticky {
+      width: 120px;
+      top: 140px;
+      right: $default-content-width/1.5 + 25;
+    }
+
+    .main-desc-3 {
+      top: 50px;
+      left: 40px;
+    }
+
+    .example-image-wrapper {
+      top: 180px;
+    }
+    .example-image {
+      width: 90%;
+    }
+  }
+  @media (max-width: $mobile) {
+    .showcase-button-sticky {
+      width: 96px;
+    }
+  }
+
 }
