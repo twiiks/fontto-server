@@ -21,7 +21,7 @@ export class Footer extends Component {
                             서로에 대한 신뢰를
                             가장 우선으로 여기며
                             좋은 소프트웨어를 만들고자
-                            열정을 쏟아고 있습니다.
+                            열정을 쏟아붓고 있습니다.
                         </div>
                     </div>
                 </div>
