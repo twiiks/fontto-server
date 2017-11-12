@@ -19,7 +19,7 @@ export class Index extends Component {
             signUpModalOpen: false
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-        this.onLogin = this.onLogin.bind(this);
+        this.onLoginOpen = this.onLoginOpen.bind(this);
         this.onLoginCancel = this.onLoginCancel.bind(this);
         this.onSignUpCancel = this.onSignUpCancel.bind(this);
         this.onSignUpOpen = this.onSignUpOpen.bind(this);
@@ -38,13 +38,15 @@ export class Index extends Component {
         this.setState({width: window.innerWidth, height: window.innerHeight});
     }
     
-    onLogin(){
+    onLoginOpen(){
+        document.body.style.position = "fixed";
         this.setState({
             loginModalOpen: true
         })
     }
 
     onSignUpOpen(){
+        document.body.style.position = "fixed";
         this.setState({
             loginModalOpen: false,
             signUpModalOpen: true
@@ -52,12 +54,14 @@ export class Index extends Component {
     }
 
     onSignUpCancel(){
+        document.body.style.position = "";
         this.setState({
             signUpModalOpen: false
         })
     }
 
     onLoginCancel(){
+        document.body.style.position = "";
         this.setState({
             loginModalOpen: false
         })
@@ -74,7 +78,7 @@ export class Index extends Component {
 
         return (
             <div className='index'>
-                <Header rightContents={<Button label='로그인' isRaised={false} onTouchTap={this.onLogin} />}/>
+                <Header rightContents={<Button label='로그인' isRaised={false} onTouchTap={this.onLoginOpen} />}/>
                 {/*<Button label='test' className='testButton'/>*/}
 
                 <div className='section-1'>
