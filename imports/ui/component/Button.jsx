@@ -13,10 +13,10 @@ export class Button extends Component {
         let isRaised;
 
         if (!this.props.backgroundColor) {
-            backgroundColor = '#333'
+            backgroundColor = '#333';
         }
         if (!this.props.labelColor) {
-            labelColor = '#fdfdfd'
+            labelColor = '#fdfdfd';
         }
 
         isRaised = !(!this.props.isRaised &&
@@ -30,6 +30,7 @@ export class Button extends Component {
                     labelColor={labelColor}
                     label={this.props.label}
                     className={this.props.className}
+                    fullWidth={this.props.fullWidth}
                     height={50}
                 />
                 :

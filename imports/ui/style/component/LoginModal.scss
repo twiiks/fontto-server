@@ -1,0 +1,31 @@
+
+.login-modal-button{
+  margin-bottom: 3px;
+}
+
+.login-modal-button-top{
+  margin-bottom: 15px;
+}
+
+.login-modal-head {
+  height: 120px;
+  background-color: #333;
+  margin: -30px -30px;
+  position: relative;
+
+  .title {
+    color: #fdfdfd;
+    font-size: 2em;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-weight: 600;
+  }
+  .desc {
+    color: #aaa;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 0.9em;
+  }
+}

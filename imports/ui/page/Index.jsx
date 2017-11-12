@@ -4,6 +4,7 @@ import Sticky from 'react-stickynode';
 import {Button} from '../component/Button';
 import {Header} from '../component/Header';
 import {Footer} from '../component/Footer';
+import {LoginModal} from '../component/LoginModal';
 
 import '../style/page/Index.scss'
 
@@ -12,9 +13,12 @@ export class Index extends Component {
         super(props);
         this.state = {
             width: '0',
-            height: '0'
+            height: '0',
+            loginModalOpen: false
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.onLogin = this.onLogin.bind(this);
+        this.onLoginCancel = this.onLoginCancel.bind(this);
     }
 
     componentDidMount() {
@@ -29,6 +33,18 @@ export class Index extends Component {
     updateWindowDimensions() {
         this.setState({width: window.innerWidth, height: window.innerHeight});
     }
+    
+    onLogin(){
+        this.setState({
+            loginModalOpen: true
+        })
+    }
+
+    onLoginCancel(){
+        this.setState({
+            loginModalOpen: false
+        })
+    }
 
     render() {
 
@@ -41,7 +57,7 @@ export class Index extends Component {
 
         return (
             <div className='index'>
-                <Header rightContents={<Button label='로그인' isRaised={false}/>}/>
+                <Header rightContents={<Button label='로그인' isRaised={false} onTouchTap={this.onLogin} />}/>
                 {/*<Button label='test' className='testButton'/>*/}
 
                 <div className='section-1'>
@@ -73,6 +89,8 @@ export class Index extends Component {
                         <Button className='showcase-button' label='구경하기'/>
                     </Sticky>
                 </div>
+
+                <LoginModal isOpen={this.state.loginModalOpen} onCancel={this.onLoginCancel}/>
 
                 <Footer/>
             </div>
