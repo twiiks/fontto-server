@@ -19,10 +19,14 @@ export class Index extends Component {
             signUpModalOpen: false
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+
         this.onLoginOpen = this.onLoginOpen.bind(this);
         this.onLoginCancel = this.onLoginCancel.bind(this);
+        this.onLogin = this.onLogin.bind(this);
+
         this.onSignUpCancel = this.onSignUpCancel.bind(this);
         this.onSignUpOpen = this.onSignUpOpen.bind(this);
+        this.onMakeFont = this.onMakeFont.bind(this);
     }
 
     componentDidMount() {
@@ -67,6 +71,14 @@ export class Index extends Component {
         })
     }
 
+    onLogin(result){
+        console.log(result);
+    }
+
+    onMakeFont(){
+        console.log('make font');
+    }
+
     render() {
 
         let stickyTop;
@@ -84,7 +96,7 @@ export class Index extends Component {
                 <div className='section-1'>
                     <img className='main-picture' src='/image/main-picture.jpg'/>
                     <Sticky className='make-font-button-sticky' enabled={true} top={stickyTop}>
-                        <Button className='make-font-button' label='폰트만들기'/>
+                        <Button className='make-font-button' label='폰트만들기' onTouchTap={this.onMakeFont}/>
                     </Sticky>
                     <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
                 </div>
@@ -111,7 +123,10 @@ export class Index extends Component {
                     </Sticky>
                 </div>
 
-                <LoginModal isOpen={this.state.loginModalOpen} onCancel={this.onLoginCancel} onSignUpOpen={this.onSignUpOpen}/>
+                <LoginModal isOpen={this.state.loginModalOpen}
+                            onCancel={this.onLoginCancel}
+                            onLogin={this.onLogin}
+                            onSignUpOpen={this.onSignUpOpen}/>
                 <SignUpModal isOpen={this.state.signUpModalOpen} onCancel={this.onSignUpCancel}/>
 
                 <Footer/>

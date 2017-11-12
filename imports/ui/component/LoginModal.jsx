@@ -8,6 +8,39 @@ import '../style/component/LoginModal.scss'
 export class LoginModal extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            email: '',
+            password: ''
+        };
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onLogin = this.onLogin.bind(this);
+    }
+
+    onEmailChange(e){
+        this.setState({
+            email: e.target.value
+        })
+    }
+
+    onPasswordChange(e){
+        this.setState({
+            password: e.target.value
+        })
+    }
+
+    onLogin(e){
+        const email = this.state.email;
+        const password = this.state.password;
+        console.log(email, password);
+
+        // TODO
+        // 로그인
+        // 이메일 없음
+        // 패스워드 다름
+        // 성공시 Index.jsx 로 결과를 넘겨줌
+
+        this.props.onLogin('login');
     }
 
     render() {
@@ -28,6 +61,7 @@ export class LoginModal extends Component {
                 </div>
                 <br/>
                 <TextField
+                    onChange={this.onEmailChange}
                     floatingLabelText='email'
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
@@ -35,6 +69,7 @@ export class LoginModal extends Component {
                     fullWidth={true}
                 />
                 <TextField
+                    onChange={this.onPasswordChange}
                     style={{marginTop: -20}}
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
@@ -46,6 +81,7 @@ export class LoginModal extends Component {
                 <br/>
                 <br/>
                 <Button
+                    onTouchTap={this.onLogin}
                     className='login-modal-button-top'
                     label="로그인"
                     primary={true}

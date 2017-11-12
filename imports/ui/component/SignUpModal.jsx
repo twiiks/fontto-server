@@ -8,6 +8,46 @@ import '../style/component/SignUpModal.scss'
 export class SignUpModal extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            email: '',
+            password: '',
+            confirmPassword: ''
+        };
+        this.onSignUp = this.onSignUp.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
+    }
+
+    onChangeEmail(e){
+        this.setState({
+            email: e.target.value
+        })
+    }
+
+    onChangePassword(e){
+        this.setState({
+            password: e.target.value
+        })
+    }
+
+    onChangeConfirmPassword(e){
+        this.setState({
+            confirmPassword: e.target.value
+        })
+    }
+
+    onSignUp() {
+        const email = this.state.email;
+        const password = this.state.password;
+        const confirmPassword = this.state.confirmPassword;
+
+        console.log(email, password, confirmPassword);
+        // server 예외처리
+        // 1. password vs confirmPassword
+        // 2. 비밀번호 6자리
+        // 3. 이메일 형식확인
+        // 4. 이메일 중복확인
     }
 
     render() {
@@ -28,6 +68,7 @@ export class SignUpModal extends Component {
                 </div>
                 <br/>
                 <TextField
+                    onChange={this.onChangeEmail}
                     floatingLabelText='email'
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
@@ -35,6 +76,7 @@ export class SignUpModal extends Component {
                     fullWidth={true}
                 />
                 <TextField
+                    onChange={this.onChangePassword}
                     style={{marginTop: -20}}
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
@@ -44,11 +86,12 @@ export class SignUpModal extends Component {
                     type='password'
                 />
                 <TextField
+                    onChange={this.onChangeConfirmPassword}
                     style={{marginTop: -20}}
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
                     floatingLabelText='confirm password'
-                    hintText="패스워드를 다시한번 확인해주세요."
+                    hintText="패스워드를 확인해주세요."
                     fullWidth={true}
                     type='password'
                 />
@@ -56,6 +99,7 @@ export class SignUpModal extends Component {
                 <br/>
                 <br/>
                 <Button
+                    onTouchTap={this.onSignUp}
                     className='signup-modal-button'
                     label="회원가입"
                     primary={true}
