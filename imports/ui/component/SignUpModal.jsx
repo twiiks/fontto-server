@@ -3,7 +3,10 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import {Button} from "./Button";
 
-import '../style/component/SignUpModal.scss'
+import {promise} from '../../api/client/promise';
+
+import '../style/component/SignUpModal.scss';
+
 
 export class SignUpModal extends Component {
     constructor(props) {
@@ -19,19 +22,19 @@ export class SignUpModal extends Component {
         this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
     }
 
-    onChangeEmail(e){
+    onChangeEmail(e) {
         this.setState({
             email: e.target.value
         })
     }
 
-    onChangePassword(e){
+    onChangePassword(e) {
         this.setState({
             password: e.target.value
         })
     }
 
-    onChangeConfirmPassword(e){
+    onChangeConfirmPassword(e) {
         this.setState({
             confirmPassword: e.target.value
         })
@@ -42,12 +45,17 @@ export class SignUpModal extends Component {
         const password = this.state.password;
         const confirmPassword = this.state.confirmPassword;
 
-        console.log(email, password, confirmPassword);
-        // server 예외처리
         // 1. password vs confirmPassword
         // 2. 비밀번호 6자리
         // 3. 이메일 형식확인
         // 4. 이메일 중복확인
+
+        promise('checkValidEmail', [email])
+            .then(res => promise('checkPasswordLength', [password]))
+            .then(res => promise('confirmPassword', [password, confirmPassword]))
+            .then(res => promise('resister', [email, password]))
+            .then(res => this.props.onSignUp(res))
+            .catch(err => this.props.onSignUp(err))
     }
 
     render() {
@@ -63,7 +71,7 @@ export class SignUpModal extends Component {
                         회원가입
                     </div>
                     <div className='desc'>
-                        fontto 의 일원이 되세요!
+                        fontto 의 회원이 되어주세요!
                     </div>
                 </div>
                 <br/>

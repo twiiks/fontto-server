@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import Sticky from 'react-stickynode';
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 
 import {Button} from '../component/Button';
 import {Header} from '../component/Header';
 import {Footer} from '../component/Footer';
 import {LoginModal} from '../component/LoginModal';
+import {SignUpModal} from "../component/SignUpModal";
 
 import '../style/page/Index.scss'
-import {SignUpModal} from "../component/SignUpModal";
 
 export class Index extends Component {
     constructor(props) {
@@ -24,8 +27,10 @@ export class Index extends Component {
         this.onLoginCancel = this.onLoginCancel.bind(this);
         this.onLogin = this.onLogin.bind(this);
 
-        this.onSignUpCancel = this.onSignUpCancel.bind(this);
         this.onSignUpOpen = this.onSignUpOpen.bind(this);
+        this.onSignUpCancel = this.onSignUpCancel.bind(this);
+        this.onSignUp = this.onSignUp.bind(this);
+
         this.onMakeFont = this.onMakeFont.bind(this);
     }
 
@@ -41,15 +46,15 @@ export class Index extends Component {
     updateWindowDimensions() {
         this.setState({width: window.innerWidth, height: window.innerHeight});
     }
-    
-    onLoginOpen(){
+
+    onLoginOpen() {
         document.body.style.position = "fixed";
         this.setState({
             loginModalOpen: true
         })
     }
 
-    onSignUpOpen(){
+    onSignUpOpen() {
         document.body.style.position = "fixed";
         this.setState({
             loginModalOpen: false,
@@ -57,25 +62,51 @@ export class Index extends Component {
         })
     }
 
-    onSignUpCancel(){
+    onSignUpCancel() {
         document.body.style.position = "";
         this.setState({
             signUpModalOpen: false
         })
     }
 
-    onLoginCancel(){
+    onLoginCancel() {
         document.body.style.position = "";
         this.setState({
             loginModalOpen: false
         })
     }
 
-    onLogin(result){
+    onLogin(result) {
         console.log(result);
     }
 
-    onMakeFont(){
+    onSignUp(res) {
+        if (res.result === 'error') {
+            switch (res.code) {
+                case 'NOT_MATCHED':
+                    Alert.error('두 비밀번호가 일치하지 않아요!');
+                    break;
+                case 'LENGTH_SHORT':
+                    Alert.error('6자리 이상의 비밀번호를 입력해주세요!');
+                    break;
+                case 'EMAIL_NOT_VALID':
+                    Alert.error('이메일 형식이 적절하지 않아요!');
+                    break;
+                case 'USER_EXIST':
+                    Alert.error('같은 메일의 유저가 이 존재합니다!');
+                    break;
+            }
+        } else {
+            Alert.success('회원가입이 완료되었습니다! <br/> 이제 로그인해주세요!',{html: true});
+            this.setState({
+                signUpModalOpen: false,
+                loginModalOpen: true
+            })
+        }
+
+    }
+
+    onMakeFont() {
         console.log('make font');
     }
 
@@ -90,7 +121,7 @@ export class Index extends Component {
 
         return (
             <div className='index'>
-                <Header rightContents={<Button label='로그인' isRaised={false} onTouchTap={this.onLoginOpen} />}/>
+                <Header rightContents={<Button label='로그인' isRaised={false} onTouchTap={this.onLoginOpen}/>}/>
                 {/*<Button label='test' className='testButton'/>*/}
 
                 <div className='section-1'>
@@ -127,9 +158,11 @@ export class Index extends Component {
                             onCancel={this.onLoginCancel}
                             onLogin={this.onLogin}
                             onSignUpOpen={this.onSignUpOpen}/>
-                <SignUpModal isOpen={this.state.signUpModalOpen} onCancel={this.onSignUpCancel}/>
-
+                <SignUpModal isOpen={this.state.signUpModalOpen}
+                             onCancel={this.onSignUpCancel}
+                             onSignUp={this.onSignUp}/>
                 <Footer/>
+                <Alert effect='jelly' stack={{limit: 1}}/>
             </div>
         );
     }

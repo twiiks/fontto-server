@@ -19,6 +19,10 @@ $default-content-width: 100px;
   }
 }
 
+.s-alert-box {
+  z-index: 2000;
+}
+
 .index {
   padding-top: $default-header-height;
   @media (max-width: $tablet) {
