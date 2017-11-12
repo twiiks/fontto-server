@@ -5,10 +5,14 @@ import '../style/component/Header.scss'
 export class Header extends Component {
     constructor(props) {
         super(props);
+        this.onHome = this.onHome.bind(this)
     }
 
     onHome(){
-        history.pushState(null, '/');
+        this.props.history.push({
+            pathname: '/',
+            state: {}
+        });
     }
 
     render() {
@@ -20,6 +24,11 @@ export class Header extends Component {
                     <div className='right-contents-wrapper'>
                         <div className='contents'>
                             {this.props.rightContents}
+                        </div>
+                    </div>
+                    <div className='right-contents-long-wrapper'>
+                        <div className='contents'>
+                            {this.props.rightLongContents}
                         </div>
                     </div>
                 </div>

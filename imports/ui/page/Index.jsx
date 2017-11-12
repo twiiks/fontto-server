@@ -80,11 +80,11 @@ export class Index extends Component {
 
     onLogin(res) {
         if (res === 'NOT_MATCHED')
-            Alert.error('일치하는 이메일이 없습니다!');
+            Alert.error('일치하는 이메일이 없습니다!', {position: 'bottom-right'});
         else if (res === 'INVALID_PASSWORD')
-            Alert.error('비밀번호가 일치하지 않습니다!');
+            Alert.error('비밀번호가 일치하지 않습니다!', {position: 'bottom-right'});
         else if (res === 'SUCCEED')
-            Alert.success('환영합니다 :)');
+            Alert.success('환영합니다 :)', {position: 'bottom-right'});
 
         this.setState({
             loginModalOpen: false
@@ -95,16 +95,16 @@ export class Index extends Component {
         if (res.result === 'error') {
             switch (res.code) {
                 case 'NOT_MATCHED':
-                    Alert.error('두 비밀번호가 일치하지 않아요!');
+                    Alert.error('두 비밀번호가 일치하지 않습니다!', {position: 'bottom-right'});
                     break;
                 case 'LENGTH_SHORT':
-                    Alert.error('6자리 이상의 비밀번호를 입력해주세요!');
+                    Alert.error('6자리 이상의 비밀번호를 입력해주세요!', {position: 'bottom-right'});
                     break;
                 case 'EMAIL_NOT_VALID':
-                    Alert.error('이메일 형식이 적절하지 않아요!');
+                    Alert.error('이메일 형식이 적절하지 않습니다!', {position: 'bottom-right'});
                     break;
                 case 'USER_EXIST':
-                    Alert.error('같은 메일의 유저가 이 존재합니다!');
+                    Alert.error('같은 메일의 유저가 이 존재합니다!', {position: 'bottom-right'});
                     break;
             }
         } else {
@@ -118,11 +118,17 @@ export class Index extends Component {
     }
 
     onMakeFont() {
-        console.log('make font');
+        if (Meteor.userId()) {
+            this.props.history.push({pathname: '/make-font'});
+        } else {
+            this.setState({
+                loginModalOpen: true
+            })
+        }
     }
 
-    onMyPage(){
-        console.log('mypage');
+    onMyPage() {
+        this.props.history.push({pathname: '/mypage'});
     }
 
     render() {
@@ -136,12 +142,13 @@ export class Index extends Component {
 
         return (
             <div className='index'>
-                <Header rightContents={
-                    Meteor.userId() ?
-                        <Button label='마이페이지' isRaised={false} onTouchTap={this.onMyPage}/>
-                        :
-                        <Button label='로그인' isRaised={false} onTouchTap={this.onLoginOpen}/>
-                }/>
+                <Header history={this.props.history}
+                        rightContents={
+                            Meteor.userId() ?
+                                <Button label='내 정보' isRaised={false} onTouchTap={this.onMyPage}/>
+                                :
+                                <Button label='로그인' isRaised={false} onTouchTap={this.onLoginOpen}/>
+                        }/>
                 {/*<Button label='test' className='testButton'/>*/}
 
                 <div className='section-1'>
@@ -182,7 +189,7 @@ export class Index extends Component {
                              onCancel={this.onSignUpCancel}
                              onSignUp={this.onSignUp}/>
                 <Footer/>
-                <Alert effect='jelly' stack={{limit: 1}}/>
+                <Alert effect='jelly' stack={{limit: 3}}/>
             </div>
         );
     }

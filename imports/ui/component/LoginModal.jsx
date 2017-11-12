@@ -33,7 +33,6 @@ export class LoginModal extends Component {
     onLogin() {
         const email = this.state.email;
         const password = this.state.password;
-        console.log(email, password);
 
         // 로그인
         // 이메일 없음
@@ -43,7 +42,6 @@ export class LoginModal extends Component {
         Meteor.loginWithPassword(email, password, function(err, res) {
             let status = '';
             if (err) {
-                console.log(err);
                 switch (err.error) {
                     case 400:
                         status = 'NOT_MATCHED';

@@ -1,0 +1,9 @@
+$tablet: 768px;
+
+.user-email {
+  margin-right: 8px;
+
+  @media (max-width: $tablet) {
+    visibility: hidden;
+  }
+}

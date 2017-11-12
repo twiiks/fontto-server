@@ -1,7 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {logger} from './logger';
-import Future from 'fibers/future';
 
 function resultObj(result, code) {
     if (result === 'error')
@@ -16,7 +15,7 @@ function validateEmail(email) {
 
 Meteor.methods({
     checkLogin: function (status, email) {
-        switch(status){
+        switch (status) {
             case 'NOT_MATCHED':
                 logger.log('info', 'login [try]: not matched / email:%s', email);
                 break;
@@ -73,11 +72,13 @@ Meteor.methods({
         } else {
             return resultObj('ok', 'SUCCEED')
         }
+    },
+
+    getUserEmailById: function (userId) {
+        if (Meteor.user())
+            return Meteor.users.find({_id: userId}).fetch()[0].emails[0].address;
+        else {
+            throw new Meteor.Error(500, resultObj('error', 'NOT_LOGGED_IN'))
+        }
     }
 });
-
-
-// updateCount: function () {
-//     Meteor.users.update({_id: Meteor.userId()},
-//         {$inc: {'profile.count': 1}})
-// }
