@@ -121,9 +121,7 @@ export class Index extends Component {
         if (Meteor.userId()) {
             this.props.history.push({pathname: '/make-font'});
         } else {
-            this.setState({
-                loginModalOpen: true
-            })
+            this.onLoginOpen()
         }
     }
 
