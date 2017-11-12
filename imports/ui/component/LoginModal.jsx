@@ -11,36 +11,12 @@ export class LoginModal extends Component {
     }
 
     render() {
-        const actions = [
-            <Button
-                className='login-modal-button-top'
-                label="로그인"
-                primary={true}
-                fullWidth={true}
-            />,
-            <Button
-                className='login-modal-button'
-                label="회원가입"
-                primary={true}
-                fullWidth={true}
-            />,
-            <Button
-                className='login-modal-button'
-                label="취소"
-                primary={true}
-                fullWidth={true}
-                backgroundColor='#fdfdfd'
-                labelColor='#333'
-                onTouchTap={this.props.onCancel}
-            />,
-        ];
-
         return (
             <Dialog
-                actions={actions}
                 modal={true}
                 open={this.props.isOpen}
                 contentStyle={{width: '300px'}}
+                autoScrollBodyContent={true}
             >
                 <div className='login-modal-head'>
                     <div className='title'>
@@ -66,6 +42,30 @@ export class LoginModal extends Component {
                     hintText="패스워드를 입력하세요."
                     fullWidth={true}
                     type='password'
+                />
+                <br/>
+                <br/>
+                <Button
+                    className='login-modal-button-top'
+                    label="로그인"
+                    primary={true}
+                    fullWidth={true}
+                />
+                <div className='sign-up-desc'>회원이 아니세요? 회원가입해보세요!</div>
+                <Button
+                    className='login-modal-button'
+                    label="회원가입"
+                    primary={true}
+                    fullWidth={true}
+                />
+                <Button
+                    className='login-modal-button'
+                    label="취소"
+                    primary={true}
+                    fullWidth={true}
+                    backgroundColor='#fdfdfd'
+                    labelColor='#333'
+                    onTouchTap={this.props.onCancel}
                 />
             </Dialog>
         );
