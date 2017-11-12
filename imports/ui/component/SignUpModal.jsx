@@ -3,9 +3,9 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import {Button} from "./Button";
 
-import '../style/component/LoginModal.scss'
+import '../style/component/SignUpModal.scss'
 
-export class LoginModal extends Component {
+export class SignUpModal extends Component {
     constructor(props) {
         super(props);
     }
@@ -18,12 +18,12 @@ export class LoginModal extends Component {
                 contentStyle={{width: '300px'}}
                 autoScrollBodyContent={true}
             >
-                <div className='login-modal-head'>
+                <div className='signup-modal-head'>
                     <div className='title'>
-                        로그인
+                        회원가입
                     </div>
                     <div className='desc'>
-                        로그인하여 여러분만의 폰트를 생성하세요!
+                        fontto 의 일원이 되세요!
                     </div>
                 </div>
                 <br/>
@@ -43,24 +43,26 @@ export class LoginModal extends Component {
                     fullWidth={true}
                     type='password'
                 />
-                <br/>
-                <br/>
-                <Button
-                    className='login-modal-button-top'
-                    label="로그인"
-                    primary={true}
+                <TextField
+                    style={{marginTop: -20}}
+                    floatingLabelFocusStyle={{color: '#999'}}
+                    underlineFocusStyle={{borderColor: '#999'}}
+                    floatingLabelText='confirm password'
+                    hintText="패스워드를 다시한번 확인해주세요."
                     fullWidth={true}
+                    type='password'
                 />
-                <div className='sign-up-desc'>회원이 아니세요? 회원가입해보세요!</div>
+
+                <br/>
+                <br/>
                 <Button
-                    className='login-modal-button'
+                    className='signup-modal-button'
                     label="회원가입"
                     primary={true}
                     fullWidth={true}
-                    onTouchTap={this.props.onSignUpOpen}
                 />
                 <Button
-                    className='login-modal-button'
+                    className='signup-modal-button'
                     label="취소"
                     primary={true}
                     fullWidth={true}

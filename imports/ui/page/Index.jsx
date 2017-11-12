@@ -7,6 +7,7 @@ import {Footer} from '../component/Footer';
 import {LoginModal} from '../component/LoginModal';
 
 import '../style/page/Index.scss'
+import {SignUpModal} from "../component/SignUpModal";
 
 export class Index extends Component {
     constructor(props) {
@@ -14,11 +15,14 @@ export class Index extends Component {
         this.state = {
             width: '0',
             height: '0',
-            loginModalOpen: false
+            loginModalOpen: false,
+            signUpModalOpen: false
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onLogin = this.onLogin.bind(this);
         this.onLoginCancel = this.onLoginCancel.bind(this);
+        this.onSignUpCancel = this.onSignUpCancel.bind(this);
+        this.onSignUpOpen = this.onSignUpOpen.bind(this);
     }
 
     componentDidMount() {
@@ -37,6 +41,19 @@ export class Index extends Component {
     onLogin(){
         this.setState({
             loginModalOpen: true
+        })
+    }
+
+    onSignUpOpen(){
+        this.setState({
+            loginModalOpen: false,
+            signUpModalOpen: true
+        })
+    }
+
+    onSignUpCancel(){
+        this.setState({
+            signUpModalOpen: false
         })
     }
 
@@ -90,7 +107,8 @@ export class Index extends Component {
                     </Sticky>
                 </div>
 
-                <LoginModal isOpen={this.state.loginModalOpen} onCancel={this.onLoginCancel}/>
+                <LoginModal isOpen={this.state.loginModalOpen} onCancel={this.onLoginCancel} onSignUpOpen={this.onSignUpOpen}/>
+                <SignUpModal isOpen={this.state.signUpModalOpen} onCancel={this.onSignUpCancel}/>
 
                 <Footer/>
             </div>
