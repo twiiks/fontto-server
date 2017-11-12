@@ -85,6 +85,7 @@ export class Index extends Component {
             Alert.error('비밀번호가 일치하지 않습니다!', {position: 'bottom-right'});
         else if (res === 'SUCCEED') {
             Alert.success('환영합니다 :)', {position: 'bottom-right'});
+            document.body.style.position = "";
             this.setState({
                 loginModalOpen: false
             })
