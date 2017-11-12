@@ -32,6 +32,8 @@ export class Index extends Component {
         this.onSignUp = this.onSignUp.bind(this);
 
         this.onMakeFont = this.onMakeFont.bind(this);
+
+        this.onMyPage = this.onMyPage.bind(this);
     }
 
     componentDidMount() {
@@ -76,8 +78,17 @@ export class Index extends Component {
         })
     }
 
-    onLogin(result) {
-        console.log(result);
+    onLogin(res) {
+        if (res === 'NOT_MATCHED')
+            Alert.error('일치하는 이메일이 없습니다!');
+        else if (res === 'INVALID_PASSWORD')
+            Alert.error('비밀번호가 일치하지 않습니다!');
+        else if (res === 'SUCCEED')
+            Alert.success('환영합니다 :)');
+
+        this.setState({
+            loginModalOpen: false
+        })
     }
 
     onSignUp(res) {
@@ -97,7 +108,7 @@ export class Index extends Component {
                     break;
             }
         } else {
-            Alert.success('회원가입이 완료되었습니다! <br/> 이제 로그인해주세요!',{html: true});
+            Alert.success('회원가입이 완료되었습니다! <br/> 이제 로그인해주세요!', {html: true});
             this.setState({
                 signUpModalOpen: false,
                 loginModalOpen: true
@@ -108,6 +119,10 @@ export class Index extends Component {
 
     onMakeFont() {
         console.log('make font');
+    }
+
+    onMyPage(){
+        console.log('mypage');
     }
 
     render() {
@@ -121,7 +136,12 @@ export class Index extends Component {
 
         return (
             <div className='index'>
-                <Header rightContents={<Button label='로그인' isRaised={false} onTouchTap={this.onLoginOpen}/>}/>
+                <Header rightContents={
+                    Meteor.userId() ?
+                        <Button label='마이페이지' isRaised={false} onTouchTap={this.onMyPage}/>
+                        :
+                        <Button label='로그인' isRaised={false} onTouchTap={this.onLoginOpen}/>
+                }/>
                 {/*<Button label='test' className='testButton'/>*/}
 
                 <div className='section-1'>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {promise} from '../../api/client/promise';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import {Button} from "./Button";
@@ -34,13 +35,32 @@ export class LoginModal extends Component {
         const password = this.state.password;
         console.log(email, password);
 
-        // TODO
         // 로그인
         // 이메일 없음
         // 패스워드 다름
         // 성공시 Index.jsx 로 결과를 넘겨줌
 
-        this.props.onLogin('login');
+        Meteor.loginWithPassword(email, password, function(err, res) {
+            let status = '';
+            if (err) {
+                console.log(err);
+                switch (err.error) {
+                    case 400:
+                        status = 'NOT_MATCHED';
+                        break;
+                    case 403:
+                        status = 'INVALID_PASSWORD';
+                        break;
+                }
+            } else {
+                status = 'SUCCEED';
+            }
+
+            promise('checkLogin', [status, email])
+                .then(this.props.onLogin(status))
+
+        }.bind(this));
+
     }
 
     render() {
@@ -89,6 +109,7 @@ export class LoginModal extends Component {
                 <br/>
                 <TextField
                     onChange={this.onEmailChange}
+                    style={{marginTop: 10}}
                     floatingLabelText='email'
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}

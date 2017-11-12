@@ -15,6 +15,21 @@ function validateEmail(email) {
 }
 
 Meteor.methods({
+    checkLogin: function (status, email) {
+        switch(status){
+            case 'NOT_MATCHED':
+                logger.log('info', 'login [try]: not matched / email:%s', email);
+                break;
+            case 'INVALID_PASSWORD':
+                logger.log('info', 'login [try]: invalid password / email:%s', email);
+                break;
+            case 'SUCCEED':
+                logger.log('info', 'login [success]: user logged in / email:%s', email);
+                break;
+        }
+        return status;
+    },
+
     resister: function (email, password) {
         try {
             const result = Accounts.createUser({

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
+import {promise} from '../../api/client/promise';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import {Button} from "./Button";
-
-import {promise} from '../../api/client/promise';
 
 import '../style/component/SignUpModal.scss';
 
