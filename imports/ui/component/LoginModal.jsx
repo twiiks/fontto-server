@@ -42,12 +42,15 @@ export class LoginModal extends Component {
         Meteor.loginWithPassword(email, password, function(err, res) {
             let status = '';
             if (err) {
-                switch (err.error) {
-                    case 400:
+                switch (err.reason) {
+                    case 'User not found':
                         status = 'NOT_MATCHED';
                         break;
-                    case 403:
+                    case 'Incorrect password':
                         status = 'INVALID_PASSWORD';
+                        break;
+                    case 'Match failed':
+                        status = 'NOT_MATCHED';
                         break;
                 }
             } else {

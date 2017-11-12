@@ -83,12 +83,13 @@ export class Index extends Component {
             Alert.error('일치하는 이메일이 없습니다!', {position: 'bottom-right'});
         else if (res === 'INVALID_PASSWORD')
             Alert.error('비밀번호가 일치하지 않습니다!', {position: 'bottom-right'});
-        else if (res === 'SUCCEED')
+        else if (res === 'SUCCEED') {
             Alert.success('환영합니다 :)', {position: 'bottom-right'});
+            this.setState({
+                loginModalOpen: false
+            })
+        }
 
-        this.setState({
-            loginModalOpen: false
-        })
     }
 
     onSignUp(res) {
