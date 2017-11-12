@@ -17,19 +17,19 @@ export class LoginModal extends Component {
         this.onLogin = this.onLogin.bind(this);
     }
 
-    onEmailChange(e){
+    onEmailChange(e) {
         this.setState({
             email: e.target.value
         })
     }
 
-    onPasswordChange(e){
+    onPasswordChange(e) {
         this.setState({
             password: e.target.value
         })
     }
 
-    onLogin(e){
+    onLogin() {
         const email = this.state.email;
         const password = this.state.password;
         console.log(email, password);
@@ -44,12 +44,39 @@ export class LoginModal extends Component {
     }
 
     render() {
+        const actions = [
+            <Button
+                onTouchTap={this.onLogin}
+                className='login-modal-button-top'
+                label="로그인"
+                primary={true}
+                fullWidth={true}
+            />,
+            <div className='sign-up-desc'>회원이 아니세요? 회원가입해보세요!</div>,
+            <Button
+                className='login-modal-button'
+                label="회원가입"
+                primary={true}
+                fullWidth={true}
+                onTouchTap={this.props.onSignUpOpen}
+            />,
+            <Button
+                className='login-modal-button'
+                label="취소"
+                primary={true}
+                fullWidth={true}
+                backgroundColor='#fdfdfd'
+                labelColor='#333'
+                onTouchTap={this.props.onCancel}
+            />
+        ];
         return (
             <Dialog
+                actions={actions}
                 modal={true}
                 open={this.props.isOpen}
                 contentStyle={{width: '300px'}}
-                autoScrollBodyContent={true}
+                autoDetectWindowHeight={false}
             >
                 <div className='login-modal-head'>
                     <div className='title'>
@@ -77,32 +104,6 @@ export class LoginModal extends Component {
                     hintText="패스워드를 입력하세요."
                     fullWidth={true}
                     type='password'
-                />
-                <br/>
-                <br/>
-                <Button
-                    onTouchTap={this.onLogin}
-                    className='login-modal-button-top'
-                    label="로그인"
-                    primary={true}
-                    fullWidth={true}
-                />
-                <div className='sign-up-desc'>회원이 아니세요? 회원가입해보세요!</div>
-                <Button
-                    className='login-modal-button'
-                    label="회원가입"
-                    primary={true}
-                    fullWidth={true}
-                    onTouchTap={this.props.onSignUpOpen}
-                />
-                <Button
-                    className='login-modal-button'
-                    label="취소"
-                    primary={true}
-                    fullWidth={true}
-                    backgroundColor='#fdfdfd'
-                    labelColor='#333'
-                    onTouchTap={this.props.onCancel}
                 />
             </Dialog>
         );

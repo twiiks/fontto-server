@@ -59,12 +59,31 @@ export class SignUpModal extends Component {
     }
 
     render() {
+        const actions = [
+            <Button
+                onTouchTap={this.onSignUp}
+                className='signup-modal-button'
+                label="회원가입"
+                primary={true}
+                fullWidth={true}
+            />,
+            <Button
+                className='signup-modal-button'
+                label="취소"
+                primary={true}
+                fullWidth={true}
+                backgroundColor='#fdfdfd'
+                labelColor='#333'
+                onTouchTap={this.props.onCancel}
+            />
+        ];
         return (
             <Dialog
+                actions={actions}
                 modal={true}
                 open={this.props.isOpen}
                 contentStyle={{width: '300px'}}
-                autoScrollBodyContent={true}
+                autoDetectWindowHeight={false}
             >
                 <div className='signup-modal-head'>
                     <div className='title'>
@@ -104,24 +123,6 @@ export class SignUpModal extends Component {
                     type='password'
                 />
 
-                <br/>
-                <br/>
-                <Button
-                    onTouchTap={this.onSignUp}
-                    className='signup-modal-button'
-                    label="회원가입"
-                    primary={true}
-                    fullWidth={true}
-                />
-                <Button
-                    className='signup-modal-button'
-                    label="취소"
-                    primary={true}
-                    fullWidth={true}
-                    backgroundColor='#fdfdfd'
-                    labelColor='#333'
-                    onTouchTap={this.props.onCancel}
-                />
             </Dialog>
         );
     }
