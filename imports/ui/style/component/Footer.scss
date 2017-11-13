@@ -46,6 +46,10 @@ $default-footer-height: 280px;
     display: table;
   }
 
+  @media (max-width: $tablet) {
+    height: $default-footer-height/1.6;
+  }
+
   @media (max-width: $mobile) {
     height: $default-footer-height/1.4;
     .title {
@@ -55,6 +59,5 @@ $default-footer-height: 280px;
     .content {
       font-size: 0.7em;
     }
-
   }
 }

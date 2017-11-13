@@ -21,13 +21,19 @@ export class LoginModal extends Component {
     onEmailChange(e) {
         this.setState({
             email: e.target.value
-        })
+        });
+        if (e.key === 'Enter') {
+            this.onLogin();
+        }
     }
 
     onPasswordChange(e) {
         this.setState({
             password: e.target.value
-        })
+        });
+        if (e.key === 'Enter') {
+            this.onLogin();
+        }
     }
 
     onLogin() {
@@ -110,6 +116,7 @@ export class LoginModal extends Component {
                 <br/>
                 <TextField
                     onChange={this.onEmailChange}
+                    onKeyPress={this.onEmailChange}
                     style={{marginTop: 10}}
                     floatingLabelText='email'
                     floatingLabelFocusStyle={{color: '#999'}}
@@ -119,6 +126,7 @@ export class LoginModal extends Component {
                 />
                 <TextField
                     onChange={this.onPasswordChange}
+                    onKeyPress={this.onPasswordChange}
                     style={{marginTop: -20}}
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
