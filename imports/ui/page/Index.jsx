@@ -3,6 +3,8 @@ import Sticky from 'react-stickynode';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
+import ScrollAnimation from 'react-animate-on-scroll';
+import "animate.css/animate.min.css";
 
 import {Button} from '../component/Button';
 import {Header} from '../component/Header';
@@ -156,7 +158,9 @@ export class Index extends Component {
                     <Sticky className='make-font-button-sticky' enabled={true} top={stickyTop}>
                         <Button className='make-font-button' label='폰트만들기' onTouchTap={this.onMakeFont}/>
                     </Sticky>
-                    <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
+                    <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" duration={2}>
+                        <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
+                    </ScrollAnimation>
                 </div>
 
                 <div className='section-2'>
