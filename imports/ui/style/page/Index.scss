@@ -6,6 +6,19 @@ $default-footer-height: 280px;
 $default-section-height: 500px;
 $default-content-width: 100px;
 
+@mixin main-desc-big($color) {
+  color: $color;
+  font-weight: 600;
+  font-size: 4em;
+  z-index: 997;
+  @media (max-width: $tablet) {
+    font-size: 2.8em;
+  }
+  @media (max-width: $mobile) {
+    font-size: 2em;
+  }
+}
+
 @mixin main-desc($color) {
   color: $color;
   font-weight: 600;
@@ -37,12 +50,12 @@ $default-content-width: 100px;
     position: absolute;
     top: 80px;
     left: 60px;
-    @include main-desc(#fdfdfd);
+    @include main-desc-big(#fdfdfd);
   }
 
   .make-font-button-sticky {
     position: absolute;
-    bottom: 80px;
+    bottom: 100px;
     right: $default-content-width + 20;
     z-index: 999;
     width: 200px;
@@ -84,7 +97,7 @@ $default-content-width: 100px;
   position: relative;
   padding: 0;
   //border: 1px solid black;
-  height: $default-section-height;
+  height: $default-section-height + 100;
 
   .desc-background {
     height: 100%;
@@ -98,7 +111,7 @@ $default-content-width: 100px;
     height: auto;
     font-weight: 600;
     position: absolute;
-    top: 40px;
+    top: 50px;
     right: 60px;
     text-align: right;
   }
@@ -107,7 +120,7 @@ $default-content-width: 100px;
     height: auto;
     width: 100%;
     position: absolute;
-    top: 160px;
+    top: 220px;
     text-align: center;
   }
 
@@ -115,21 +128,29 @@ $default-content-width: 100px;
     display: inline-block;
     margin: -1% -1%;
     width: 30%;
-    max-width: 350px;
+    max-width: 300px;
   }
 
   @media (max-width: $tablet) {
-    height: $default-section-height/1.2;
+    height: $default-section-height/1.1;
     .main-desc-2 {
-      top: 30px;
+      top: 40px;
       right: 40px;
+    }
+
+    .desc-image-wrapper {
+      top: 180px;
     }
   }
 
   @media(max-width: $mobile) {
     height: $default-section-height/0.55;
     .desc-image {
-      width: 250px;
+      width: 230px;
+    }
+
+    .desc-image-wrapper {
+      top: 160px;
     }
   }
 }
