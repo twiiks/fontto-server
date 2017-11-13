@@ -177,7 +177,7 @@ export class Index extends Component {
                         <img className='example-image' src='/image/example-3.png'/>
                     </div>
                     <Sticky className='showcase-button-sticky' enabled={true} top={stickyTop}>
-                        <Button className='showcase-button' label='구경하기'/>
+                        <Button className='showcase-button' disabled={true} label='구경하기'/>
                     </Sticky>
                 </div>
 

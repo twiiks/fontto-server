@@ -32,12 +32,15 @@ export class Button extends Component {
                     className={this.props.className}
                     fullWidth={this.props.fullWidth}
                     height={50}
+                    disabled={this.props.disabled}
                 />
                 :
                 <FlatButton
                     onTouchTap={this.props.onTouchTap}
                     label={this.props.label}
-                    className={this.props.className}/>
+                    className={this.props.className}
+                    disabled={this.props.disabled}
+                />
 
         );
     }
