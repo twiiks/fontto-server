@@ -53,11 +53,11 @@ $default-footer-height: 280px;
   @media (max-width: $mobile) {
     height: $default-footer-height/1.4;
     .title {
-      font-size: 1em;
+      font-size: 0.9em;
     }
 
     .content {
-      font-size: 0.7em;
+      font-size: 0.6em;
     }
   }
 }
