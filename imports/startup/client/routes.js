@@ -16,7 +16,7 @@ import {App} from '../../ui/App';
 import {Index} from '../../ui/page/Index';
 import {MyPage} from '../../ui/page/MyPage';
 import {Test} from '../../ui/page/Test';
-import {MakeFont} from "../../ui/page/MakeFont";
+import {Demo} from "../../ui/page/Demo";
 
 
 Meteor.startup(() => {
@@ -29,7 +29,7 @@ Meteor.startup(() => {
                     <Switch>
                         <Route exact path="/test" component={Test}/>
                         <Route exact path="/mypage" component={MyPage}/>
-                        <Route exact path="/make-font" component={MakeFont}/>
+                        <Route exact path="/demo" component={Demo}/>
                     </Switch>
                 </App>
             </MuiThemeProvider>

@@ -33,7 +33,7 @@ export class Index extends Component {
         this.onSignUpCancel = this.onSignUpCancel.bind(this);
         this.onSignUp = this.onSignUp.bind(this);
 
-        this.onMakeFont = this.onMakeFont.bind(this);
+        this.onDemo = this.onDemo.bind(this);
 
         this.onMyPage = this.onMyPage.bind(this);
     }
@@ -121,9 +121,9 @@ export class Index extends Component {
 
     }
 
-    onMakeFont() {
+    onDemo() {
         if (Meteor.userId()) {
-            this.props.history.push({pathname: '/make-font'});
+            this.props.history.push({pathname: '/demo'});
         } else {
             this.onLoginOpen()
         }
@@ -156,7 +156,10 @@ export class Index extends Component {
                 <div className='section-1'>
                     <img className='main-picture' src='/image/main-picture.jpg'/>
                     <Sticky className='make-font-button-sticky' enabled={true} top={stickyTop}>
-                        <Button className='make-font-button' label='폰트만들기' onTouchTap={this.onMakeFont}/>
+                        <Button disabled={true} className='make-font-button' label='폰트만들기' />
+                    </Sticky>
+                    <Sticky className='demo-button-sticky' enabled={true} top={stickyTop}>
+                        <Button className='make-font-button' label='체험해보기' onTouchTap={this.onDemo}/>
                     </Sticky>
                     <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" duration={2}>
                         <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>

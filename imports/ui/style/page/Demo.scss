@@ -1,0 +1,61 @@
+$tablet: 768px;
+$mobile: 425px;
+
+$default-content-height: 40px;
+$default-padding: 20px;
+$default-button-width: 100px;
+$default-progress-width: calc(100% - #{$default-padding/0.25} - #{$default-button-width/0.5});
+
+$mobile-content-height: 30px;
+$mobile-padding: 10px;
+$mobile-button-width: 80px;
+$mobile-progress-width: calc(100% - #{$mobile-padding/0.25} - #{$mobile-button-width/0.5});
+
+.bottom-wrapper {
+  position: absolute;
+  height: $default-content-height;
+  bottom: 0;
+  border: 1px solid red;
+  padding: $default-padding;
+  width: calc(100% - #{$default-padding/0.5});
+
+  @media (max-width: $mobile) {
+    height: $mobile-content-height;
+    width: calc(100% - #{$mobile-padding/0.5});
+    padding: 10px;
+  }
+
+  .progress {
+    height: $default-content-height;
+    position: absolute;
+    top: $default-padding;
+    width: $default-progress-width;
+    left: $default-button-width + $default-padding + $default-padding;
+    border: 1px solid green;
+
+    @media(max-width: $mobile) {
+      width: $mobile-progress-width;
+      top: $mobile-padding;
+      left: $mobile-button-width + $mobile-padding + $mobile-padding;
+      height: $mobile-content-height;
+    }
+  }
+
+  .pre-button, .next-button {
+    width: $default-button-width;
+    height: $default-content-height;
+    border: 1px solid blue;
+    @media (max-width: $mobile) {
+      height: $mobile-content-height;
+      width: $mobile-button-width;
+    }
+  }
+
+  .pre-button {
+    float: left;
+  }
+
+  .next-button {
+    float: right;
+  }
+}

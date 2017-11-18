@@ -53,13 +53,21 @@ $default-content-width: 100px;
     @include main-desc-big(#fdfdfd);
   }
 
-  .make-font-button-sticky {
+  .make-font-button-sticky, .demo-button-sticky {
     position: absolute;
-    bottom: 100px;
     right: $default-content-width + 20;
     z-index: 999;
     width: 200px;
   }
+
+  .make-font-button-sticky {
+    bottom: 100px;
+  }
+
+  .demo-button-sticky {
+    bottom: 160px;
+  }
+
   .make-font-button {
     width: 100%;
     position: absolute;
@@ -76,7 +84,7 @@ $default-content-width: 100px;
     .main-picture {
       height: $default-section-height/1.5;
     }
-    .make-font-button-sticky {
+    .make-font-button-sticky, .demo-button-sticky {
       right: $default-content-width/1.5 + 25;
       width: 120px;
     }
@@ -87,7 +95,7 @@ $default-content-width: 100px;
   }
 
   @media (max-width: $mobile) {
-    .make-font-button-sticky {
+    .make-font-button-sticky, .demo-button-sticky {
       width: 96px;
     }
   }

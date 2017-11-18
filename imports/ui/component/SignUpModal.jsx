@@ -19,34 +19,33 @@ export class SignUpModal extends Component {
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
+        this.onKeyPress = this.onKeyPress(this);
     }
 
     onChangeEmail(e) {
         this.setState({
             email: e.target.value
         });
-        if (e.key === 'Enter') {
-            this.onSignUp();
-        }
     }
 
     onChangePassword(e) {
         this.setState({
             password: e.target.value
         });
-        if (e.key === 'Enter') {
-            this.onSignUp();
-        }
     }
 
     onChangeConfirmPassword(e) {
         this.setState({
             confirmPassword: e.target.value
         });
+    }
+
+    onKeyPress(e){
         if (e.key === 'Enter') {
             this.onSignUp();
         }
     }
+
 
     onSignUp() {
         const email = this.state.email;
@@ -104,7 +103,7 @@ export class SignUpModal extends Component {
                 <br/>
                 <TextField
                     onChange={this.onChangeEmail}
-                    onKeyPress={this.onChangeEmail}
+                    onKeyPress={this.onKeyPress}
                     floatingLabelText='email'
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
@@ -113,7 +112,7 @@ export class SignUpModal extends Component {
                 />
                 <TextField
                     onChange={this.onChangePassword}
-                    onKeyPress={this.onChangePassword}
+                    onKeyPress={this.onKeyPress}
                     style={{marginTop: -20}}
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
@@ -124,7 +123,7 @@ export class SignUpModal extends Component {
                 />
                 <TextField
                     onChange={this.onChangeConfirmPassword}
-                    onKeyPress={this.onChangePassword}
+                    onKeyPress={this.onKeyPress}
                     style={{marginTop: -20}}
                     floatingLabelFocusStyle={{color: '#999'}}
                     underlineFocusStyle={{borderColor: '#999'}}
