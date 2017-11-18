@@ -221,7 +221,7 @@ $mobile-drawer-small: 8px;
 
 .up-enter.up-enter-active {
   transform: translateY(0%);
-  transition: transform .1s ease-in;
+  transition: transform .2s ease-in;
 }
 
 .up-leave {
@@ -230,7 +230,7 @@ $mobile-drawer-small: 8px;
 
 .up-leave.up-leave-active {
   transform: translateY(0%);
-  transition: transform .1s ease-in;
+  transition: transform .2s ease-in;
 }
 
 .up-appear {
@@ -239,7 +239,7 @@ $mobile-drawer-small: 8px;
 
 .up-appear.up-appear-active {
   transform: translateY(0%);
-  transition: transform .1s ease-in;
+  transition: transform .2s ease-in;
 }
 
 
