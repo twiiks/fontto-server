@@ -11,7 +11,7 @@ export class Demo extends Component {
         this.state = {
             width: 0,
             height: 0,
-            fonts: '가나다라마바사아자차카',
+            fonts: '폰토는딥러닝기반ㅍ폰트생성서비스입니다',
             currentIndex: 0,
             contextDic: {},
             defaultLineWidthList: [16, 32, 40],
