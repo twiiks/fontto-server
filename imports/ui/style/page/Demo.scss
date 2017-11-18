@@ -5,11 +5,56 @@ $default-content-height: 40px;
 $default-padding: 20px;
 $default-button-width: 100px;
 $default-progress-width: calc(100% - #{$default-padding/0.25} - #{$default-button-width/0.5});
+$default-fonts-height: 40px;
 
 $mobile-content-height: 30px;
 $mobile-padding: 10px;
 $mobile-button-width: 80px;
 $mobile-progress-width: calc(100% - #{$mobile-padding/0.25} - #{$mobile-button-width/0.5});
+$mobile-fonts-height: 20px;
+
+.demo {
+  overflow: hidden;
+}
+
+.canvas-list-wrapper {
+  position: absolute;
+  bottom: $default-content-height + $default-padding / 0.5 + $default-fonts-height;
+  width: 100%;
+  text-align: center;
+  @media (max-width: $mobile) {
+    bottom: $mobile-content-height + $mobile-padding / 0.5 + $mobile-fonts-height;
+  }
+
+  .canvas-wrapper {
+    position: relative;
+    width: calc(85% - 20px);
+    max-width: 768px;
+    padding: 20px 15% 20px 20px;
+    border: 1px solid black;
+    margin: 0 auto;
+  }
+
+  .font {
+    float: left;
+  }
+  .canvas {
+    float: right;
+  }
+}
+
+.pen-selector {
+  width: 40px;
+  height: 280px;
+  border: 1px solid blue;
+  position: fixed;
+  right: 3%;
+  bottom: $default-content-height + $default-padding/0.5 + 20;
+  @media(max-width: $mobile) {
+    width: 30px;
+    height: 210px;
+  }
+}
 
 .bottom-wrapper {
   position: absolute;
@@ -58,4 +103,31 @@ $mobile-progress-width: calc(100% - #{$mobile-padding/0.25} - #{$mobile-button-w
   .next-button {
     float: right;
   }
+}
+
+.up-enter {
+  transform: translateY(100%);
+}
+
+.up-enter.up-enter-active {
+  transform: translateY(0%);
+  transition: transform .5s ease-in;
+}
+
+.up-leave {
+  transform: translateY(100%);
+}
+
+.up-leave.up-leave-active {
+  transform: translateY(0%);
+  transition: transform .5s ease-in;
+}
+
+.up-appear {
+  transform: translateY(100%);
+}
+
+.up-appear.up-appear-active {
+  transform: translateY(0%);
+  transition: transform .5s ease-in;
 }

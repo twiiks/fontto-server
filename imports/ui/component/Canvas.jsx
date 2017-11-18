@@ -90,16 +90,17 @@ export class Canvas extends Component {
         return (
             <div>
                 <canvas id={this.props.id} ref='drawingCanvas'
-                               width={this.props.width}
-                               height={this.props.height}
+                        className={this.props.className}
+                        width={this.props.width}
+                        height={this.props.height}
 
-                               onTouchStart={this.onMouseDown}
-                               onTouchMove={this.draw}
-                               onMouseMove={this.draw}
-                               onMouseDown={this.onMouseDown}
-                               onTouchEnd={this.onDrawEnd}
-                               onMouseUp={this.onDrawEnd}
-                               onMouseOut={this.onDrawEnd}/>
+                        onTouchStart={this.onMouseDown}
+                        onTouchMove={this.draw}
+                        onMouseMove={this.draw}
+                        onMouseDown={this.onMouseDown}
+                        onTouchEnd={this.onDrawEnd}
+                        onMouseUp={this.onDrawEnd}
+                        onMouseOut={this.onDrawEnd}/>
             </div>
         );
     }
