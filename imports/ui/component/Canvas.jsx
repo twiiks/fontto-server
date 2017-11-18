@@ -8,7 +8,8 @@ export class Canvas extends Component {
         this.state = {
             isDrawing: false,
             lastX: 0,
-            lastY: 0
+            lastY: 0,
+            drawCounter: 1
         };
         this.draw = this.draw.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -21,7 +22,15 @@ export class Canvas extends Component {
     }
 
     ctx() {
-        return this.canvas().getContext('2d');
+        this.props.getContext(this.canvas().getContext('2d'),
+            this.canvas().getContext('2d').getImageData(0, 0, this.props.height, this.props.width));
+        if (this.props.image && this.state.drawCounter === 1) {
+            this.canvas().getContext('2d').putImageData(this.props.image, 0, 0);
+            this.setState({drawCounter: this.state.drawCounter + 1});
+            return this.canvas().getContext('2d');
+        } else {
+            return this.canvas().getContext('2d');
+        }
     }
 
     componentDidMount() {
@@ -46,7 +55,7 @@ export class Canvas extends Component {
         if (this.state.isDrawing) {
             ctx.beginPath();
             ctx.moveTo(this.state.lastX, this.state.lastY);
-            ctx.strokeStyle = '#000';
+            ctx.strokeStyle = this.props.strokeStyle;
             ctx.lineJoin = 'round';
             ctx.lineCap = 'round';
             ctx.lineWidth = this.props.lineWidth;

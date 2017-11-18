@@ -7,11 +7,19 @@ $default-button-width: 100px;
 $default-progress-width: calc(100% - #{$default-padding/0.25} - #{$default-button-width/0.5});
 $default-fonts-height: 40px;
 
+$default-drawer-big: 40px;
+$default-drawer-mid: 32px;
+$default-drawer-small: 16px;
+
 $mobile-content-height: 30px;
 $mobile-padding: 10px;
 $mobile-button-width: 80px;
 $mobile-progress-width: calc(100% - #{$mobile-padding/0.25} - #{$mobile-button-width/0.5});
 $mobile-fonts-height: 20px;
+
+$mobile-drawer-big: 24px;
+$mobile-drawer-mid: 16px;
+$mobile-drawer-small: 8px;
 
 .demo {
   overflow: hidden;
@@ -28,11 +36,15 @@ $mobile-fonts-height: 20px;
 
   .canvas-wrapper {
     position: relative;
-    width: calc(85% - 20px);
+    width: calc(100% - 120px);
     max-width: 768px;
-    padding: 20px 15% 20px 20px;
-    border: 1px solid black;
+    padding: 20px 100px 20px 20px;
+    //border: 1px solid black;
     margin: 0 auto;
+    @media (max-width: $mobile) {
+      width: calc(100% - 90px);
+      padding: 10px 80px 10px 10px;
+    }
   }
 
   .font {
@@ -43,16 +55,84 @@ $mobile-fonts-height: 20px;
   }
 }
 
-.pen-selector {
-  width: 40px;
-  height: 280px;
-  border: 1px solid blue;
+.draw-selector {
+  width: 50px;
+  height: 300px;
+  //border: 1px solid blue;
   position: fixed;
   right: 3%;
   bottom: $default-content-height + $default-padding/0.5 + 20;
   @media(max-width: $mobile) {
     width: 30px;
-    height: 210px;
+    height: 180px;
+  }
+
+  .draw {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    //border: 1px solid yellow;
+    @media(max-width: $mobile) {
+      height: 30px;
+    }
+
+    .pen, .eraser {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @media(max-width: $mobile) {
+      }
+    }
+    .pen {
+      background-color: black;
+    }
+    .eraser {
+      background-color: white;
+      border: 1px solid black;
+    }
+
+    .big {
+      margin-top: - $default-drawer-big / 2;
+      margin-left: - $default-drawer-big / 2;
+      border-radius: $default-drawer-big / 2;
+      height: $default-drawer-big;
+      width: $default-drawer-big;
+      border-radius: $default-drawer-big/2;
+      @media(max-width: $mobile) {
+        margin-top: - $mobile-drawer-big / 2;
+        margin-left: - $mobile-drawer-big / 2;
+        width: $mobile-drawer-big;
+        height: $mobile-drawer-big;
+      }
+    }
+    .mid {
+      margin-top: - $default-drawer-mid / 2;
+      margin-left: - $default-drawer-mid / 2;
+      border-radius: $default-drawer-mid / 2;
+      height: $default-drawer-mid;
+      width: $default-drawer-mid;
+      border-radius: $default-drawer-mid/2;
+      @media(max-width: $mobile) {
+        margin-top: - $mobile-drawer-mid / 2;
+        margin-left: - $mobile-drawer-mid / 2;
+        width: $mobile-drawer-mid;
+        height: $mobile-drawer-mid;
+      }
+    }
+    .small {
+      margin-top: - $default-drawer-small / 2;
+      margin-left: - $default-drawer-small / 2;
+      border-radius: $default-drawer-small / 2;
+      height: $default-drawer-small;
+      width: $default-drawer-small;
+      border-radius: $default-drawer-small/2;
+      @media(max-width: $mobile) {
+        margin-top: - $mobile-drawer-small / 2;
+        margin-left: - $mobile-drawer-small / 2;
+        width: $mobile-drawer-small;
+        height: $mobile-drawer-small;
+      }
+    }
   }
 }
 
@@ -106,28 +186,28 @@ $mobile-fonts-height: 20px;
 }
 
 .up-enter {
-  transform: translateY(100%);
+  transform: translate(-100%);
 }
 
 .up-enter.up-enter-active {
-  transform: translateY(0%);
+  transform: translate(0%);
   transition: transform .5s ease-in;
 }
 
 .up-leave {
-  transform: translateY(100%);
+  transform: translate(-100%);
 }
 
 .up-leave.up-leave-active {
-  transform: translateY(0%);
+  transform: translate(0%);
   transition: transform .5s ease-in;
 }
 
 .up-appear {
-  transform: translateY(100%);
+  transform: translate(-100%);
 }
 
 .up-appear.up-appear-active {
-  transform: translateY(0%);
+  transform: translate(0%);
   transition: transform .5s ease-in;
 }
