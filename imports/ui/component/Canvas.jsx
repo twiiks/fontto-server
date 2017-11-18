@@ -33,6 +33,11 @@ export class Canvas extends Component {
         }
     }
 
+    componentWillUnmount(){
+        const canvas = this.canvas();
+        const ctx = this.ctx();
+    }
+
     componentDidMount() {
         const canvas = this.canvas();
         const ctx = this.ctx();

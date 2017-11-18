@@ -60,10 +60,10 @@ export class Demo extends Component {
                 <ReactCSSTransitionGroup
                     key={'canvas-wrapper-' + i}
                     transitionName='up'
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}
+                    transitionEnterTimeout={100}
+                    transitionLeaveTimeout={100}
                     transitionAppear={true}
-                    transitionAppearTimeout={500}>
+                    transitionAppearTimeout={100}>
                     <div style={{height: canvasSize}}
                          className='canvas-wrapper'>
                         <div className="font" style={{fontSize: canvasSize * 0.9}}>

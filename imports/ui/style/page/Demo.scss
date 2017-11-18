@@ -186,28 +186,28 @@ $mobile-drawer-small: 8px;
 }
 
 .up-enter {
-  transform: translate(-100%);
+  transform: translateY(100%);
 }
 
 .up-enter.up-enter-active {
-  transform: translate(0%);
-  transition: transform .5s ease-in;
+  transform: translateY(0%);
+  transition: transform .1s ease-in;
 }
 
 .up-leave {
-  transform: translate(-100%);
+  transform: translateY(100%);
 }
 
 .up-leave.up-leave-active {
-  transform: translate(0%);
-  transition: transform .5s ease-in;
+  transform: translateY(0%);
+  transition: transform .1s ease-in;
 }
 
 .up-appear {
-  transform: translate(-100%);
+  transform: translateY(100%);
 }
 
 .up-appear.up-appear-active {
-  transform: translate(0%);
-  transition: transform .5s ease-in;
+  transform: translateY(0%);
+  transition: transform .1s ease-in;
 }
