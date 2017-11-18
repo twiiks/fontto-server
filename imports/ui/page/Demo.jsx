@@ -20,7 +20,8 @@ export class Demo extends Component {
             currentLineColor: '#000',
             drawerHighlighter: ['1px solid red', '1px solid black',
                 '1px solid black', '1px solid black', '1px solid black', '1px solid black'],
-            currentDrawerHighlighter: 0
+            currentDrawerHighlighter: 0,
+            descExists: true
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onNext = this.onNext.bind(this);
@@ -35,6 +36,12 @@ export class Demo extends Component {
         };
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+        if(this.state.width < 768){
+            this.setState({
+                currentLineWidth: 8
+            })
+        }
+
     }
 
     componentWillUnmount() {
@@ -99,6 +106,7 @@ export class Demo extends Component {
         }
         this.setState({
             animation: 'up',
+            descExists: false,
             currentIndex: this.state.currentIndex + 1
         })
     }
@@ -106,6 +114,10 @@ export class Demo extends Component {
     onPrev() {
         if (this.state.currentIndex === 0) {
             return;
+        } else if (this.state.currentIndex === 1){
+            this.setState({
+                descExists: true
+            });
         }
 
         this.setState({
@@ -118,9 +130,7 @@ export class Demo extends Component {
         let drawerHighlighter = this.state.drawerHighlighter;
         drawerHighlighter[this.state.currentDrawerHighlighter] = '1px solid black';
         drawerHighlighter[index] = '1px solid red';
-        this.setState({
-
-        });
+        this.setState({});
 
         this.setState({
             currentLineColor: lineColor,
@@ -142,6 +152,30 @@ export class Demo extends Component {
                         rightLongContents={
                             <div style={{marginRight: 8}}>체험해보기</div>
                         }/>
+
+                {this.state.descExists ?
+                    <ReactCSSTransitionGroup
+                        transitionName='fade'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}
+                        transitionAppear={true}
+                        transitionAppearTimeout={500}>
+                        <div className='demo-desc-wrapper'>
+                            <div className='demo-desc-title'>
+                                시작하기 전 필독해주세요 :)
+                            </div>
+                            <div className='demo-desc-contents'>
+                                0. fontto 는 실제 글자를 반영하기 위해 <b>터치펜</b>을 권장힙니다!<br/>
+                                1. 아래의 오른쪽 <b>네모칸에</b> 왼쪽의 글자를 따라써주세요.<br/>
+                                2. 오른쪽 아래의 동그라미로 <b>굵기 및 지우개</b>를 사용하실 수 있습니다.<br/>
+                                3. 글자를 작성하고 <b>'다음'</b>을 누르면, 다음 글자를 작성하실 수 있습니다.<br/>
+                                4. 이전 글자를 다시쓰고 싶으면, 언제든 <b>'이전'</b>을 눌러주세요.<br/>
+                                5. 아래의 <b>프로그레스 바</b>에서 진행상태를 확인해주세요.<br/>
+                                6. 데모에서는 전체 2,350 글자의 <b>21%</b> 가량을 생성할 수 있어요.<br/>
+                                7. 여러분만의 재밌는 글자를 만들어보세요!
+                            </div>
+                        </div>
+                    </ReactCSSTransitionGroup> : null}
 
 
                 <div className='canvas-list-wrapper'>

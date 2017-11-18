@@ -25,6 +25,36 @@ $mobile-drawer-small: 8px;
   overflow: hidden;
 }
 
+.demo-desc-wrapper {
+  position: fixed;
+  top: 130px;
+  text-align: center;
+  width: 100%;
+
+  b {
+    color: #333333;
+  }
+
+  .demo-desc-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #111;
+  }
+
+  .demo-desc-contents {
+    font-size: 0.8em;
+    line-height: 1.8em;
+    color: #888888;
+  }
+  @media (max-width: $mobile) {
+
+    .demo-desc-contents {
+      font-size: 0.6em;
+      line-height: 1.4em;
+    }
+  }
+}
+
 .canvas-list-wrapper {
   position: absolute;
   bottom: $default-content-height + $default-padding / 0.5 + $default-fonts-height;
@@ -42,8 +72,8 @@ $mobile-drawer-small: 8px;
     //border: 1px solid black;
     margin: 0 auto;
     @media (max-width: $mobile) {
-      width: calc(100% - 90px);
-      padding: 10px 80px 10px 10px;
+      width: calc(100% - 60px);
+      padding: 10px 50px 10px 10px;
     }
   }
 
@@ -210,4 +240,32 @@ $mobile-drawer-small: 8px;
 .up-appear.up-appear-active {
   transform: translateY(0%);
   transition: transform .1s ease-in;
+}
+
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition:  opacity 500ms ease-in;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition:  opacity 500ms ease-in;
+}
+
+.fade-appear {
+  opacity: 0.01;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transition:  opacity 500ms ease-in;
 }
