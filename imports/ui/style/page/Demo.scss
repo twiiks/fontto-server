@@ -47,7 +47,7 @@ $mobile-drawer-small: 8px;
     color: #888;
   }
   @media (max-width: $mobile) {
-
+    top: 90px;
     .demo-desc-contents {
       font-size: 0.7em;
       line-height: 2em;
@@ -242,14 +242,13 @@ $mobile-drawer-small: 8px;
   transition: transform .2s ease-in;
 }
 
-
 .fade-enter {
   opacity: 0.01;
 }
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition:  opacity 500ms ease-in;
+  transition: opacity 500ms ease-in;
 }
 
 .fade-leave {
@@ -258,7 +257,7 @@ $mobile-drawer-small: 8px;
 
 .fade-leave.fade-leave-active {
   opacity: 0.01;
-  transition:  opacity 500ms ease-in;
+  transition: opacity 500ms ease-in;
 }
 
 .fade-appear {
@@ -267,5 +266,5 @@ $mobile-drawer-small: 8px;
 
 .fade-appear.fade-appear-active {
   opacity: 1;
-  transition:  opacity 500ms ease-in;
+  transition: opacity 500ms ease-in;
 }
