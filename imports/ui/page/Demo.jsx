@@ -24,7 +24,7 @@ export class Demo extends Component {
             currentDrawerHighlighter: 0,
             descExists: true,
             progress: 0,
-            currentProgressGoal: 15
+            currentProgressGoal: 0
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onNext = this.onNext.bind(this);
@@ -32,6 +32,7 @@ export class Demo extends Component {
         this.getContext = this.getContext.bind(this);
         this.onSelectDrawer = this.onSelectDrawer.bind(this);
         this.increaseProgress = this.increaseProgress.bind(this);
+        this.decreaseProgress = this.decreaseProgress.bind(this);
     }
 
     componentDidMount() {
@@ -104,34 +105,48 @@ export class Demo extends Component {
         })
     }
 
-    increaseProgress() {
+    increaseProgress(goal) {
         let progress = this.state.progress + 1;
-        if (progress >= this.state.currentProgressGoal || progress >= 100) {
+        if (progress >= goal || progress >= 100) {
             clearTimeout(this.tm);
             if (progress >= 100) {
                 progress = 100;
             }
             this.setState({
-                currentProgressGoal: this.state.currentProgressGoal + 15,
                 progress
             });
             return;
         }
         this.setState({progress});
-        this.tm = setTimeout(this.increaseProgress, 20);
+        this.tm = setTimeout(this.increaseProgress, 30, goal);
     }
 
+    decreaseProgress(goal) {
+        let progress = this.state.progress - 1;
+        if (progress <= goal || progress <= 0) {
+            clearTimeout(this.tm);
+            if (progress <= 0) {
+                progress = 0;
+            }
+            this.setState({
+                progress
+            });
+            return;
+        }
+        this.setState({progress});
+        this.tm = setTimeout(this.decreaseProgress, 30, goal);
+    }
 
     onNext() {
-        this.increaseProgress();
         if (this.state.currentIndex === this.state.fonts.length - 1) {
             return;
         }
         this.setState({
             animation: 'up',
             descExists: false,
-            currentIndex: this.state.currentIndex + 1
-        })
+            currentIndex: this.state.currentIndex + 1,
+        });
+        this.increaseProgress((this.state.currentIndex + 1) / (this.state.fonts.length-1) * 100);
     }
 
     onPrev() {
@@ -145,8 +160,9 @@ export class Demo extends Component {
 
         this.setState({
             animation: 'down',
-            currentIndex: this.state.currentIndex - 1
-        })
+            currentIndex: this.state.currentIndex - 1,
+        });
+        this.decreaseProgress((this.state.currentIndex - 1) / (this.state.fonts.length-1) * 100);
     }
 
     onSelectDrawer(index, lineWidth, lineColor) {
@@ -167,6 +183,7 @@ export class Demo extends Component {
         if (this.state.width >= 768) {
             lineWidthList = this.state.defaultLineWidthList;
         }
+
         return (
             <div className='demo'>
                 <Header history={this.props.history}
@@ -248,6 +265,7 @@ export class Demo extends Component {
                         <div className='button-contents'>＜ 이전</div>
                     </div>
                     <div className='progress'>
+                        <div className='desc'>데모 폰트 생성 {this.state.progress}%</div>
                         <Line percent={this.state.progress}
                               strokeLinecap='square'
                               strokeColor='#44bc40'

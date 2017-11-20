@@ -190,11 +190,22 @@ $mobile-drawer-small: 8px;
     border: 1px solid #ddd;
     border-radius: 5px;
 
+    .desc {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      top: 10px;
+    }
+
     @media(max-width: $mobile) {
       width: $mobile-progress-width;
       top: $mobile-padding;
       left: $mobile-button-width + $mobile-padding + $mobile-padding;
       height: $mobile-content-height;
+      .desc {
+        top: 8px;
+        font-size: 0.8em;
+      }
     }
   }
 
