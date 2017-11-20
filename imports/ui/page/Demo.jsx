@@ -146,7 +146,7 @@ export class Demo extends Component {
             descExists: false,
             currentIndex: this.state.currentIndex + 1,
         });
-        this.increaseProgress((this.state.currentIndex + 1) / (this.state.fonts.length-1) * 100);
+        this.increaseProgress((this.state.currentIndex + 1) / (this.state.fonts.length - 1) * 100);
     }
 
     onPrev() {
@@ -162,7 +162,7 @@ export class Demo extends Component {
             animation: 'down',
             currentIndex: this.state.currentIndex - 1,
         });
-        this.decreaseProgress((this.state.currentIndex - 1) / (this.state.fonts.length-1) * 100);
+        this.decreaseProgress((this.state.currentIndex - 1) / (this.state.fonts.length - 1) * 100);
     }
 
     onSelectDrawer(index, lineWidth, lineColor) {
@@ -265,7 +265,12 @@ export class Demo extends Component {
                         <div className='button-contents'>＜ 이전</div>
                     </div>
                     <div className='progress'>
-                        <div className='desc'>데모 폰트 생성 {this.state.progress}%</div>
+                        {this.state.progress !== 100 ?
+                            <div className='desc'>데모 폰트 생성 {this.state.progress}%</div>
+                            :
+                            <div className='desc complete'>클릭하여 폰트 생성하기</div>
+                        }
+
                         <Line percent={this.state.progress}
                               strokeLinecap='square'
                               strokeColor='#44bc40'

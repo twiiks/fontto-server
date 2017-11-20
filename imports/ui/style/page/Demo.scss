@@ -195,6 +195,16 @@ $mobile-drawer-small: 8px;
       text-align: center;
       width: 100%;
       top: 10px;
+      color: white;
+    }
+    .complete {
+      color: white;
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
     }
 
     @media(max-width: $mobile) {
@@ -215,7 +225,7 @@ $mobile-drawer-small: 8px;
     background-color: #333;
     border-radius: 4px;
     box-shadow: 0 4px gray;
-    :active{
+    :active {
       background-color: #999;
       border-radius: 4px;
     }
