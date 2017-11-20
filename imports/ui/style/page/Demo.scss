@@ -186,7 +186,9 @@ $mobile-drawer-small: 8px;
     top: $default-padding;
     width: $default-progress-width;
     left: $default-button-width + $default-padding + $default-padding;
-    border: 1px solid green;
+    background-color: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 
     @media(max-width: $mobile) {
       width: $mobile-progress-width;

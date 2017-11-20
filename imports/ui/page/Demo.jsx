@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Header} from '../component/Header';
 import {Canvas} from '../component/Canvas';
+import {Line} from 'rc-progress';
 
 import '../style/page/Demo.scss';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -21,13 +22,16 @@ export class Demo extends Component {
             drawerHighlighter: ['1px solid red', '1px solid black',
                 '1px solid black', '1px solid black', '1px solid black', '1px solid black'],
             currentDrawerHighlighter: 0,
-            descExists: true
+            descExists: true,
+            progress: 0,
+            currentProgressGoal: 15
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onNext = this.onNext.bind(this);
         this.onPrev = this.onPrev.bind(this);
         this.getContext = this.getContext.bind(this);
         this.onSelectDrawer = this.onSelectDrawer.bind(this);
+        this.increaseProgress = this.increaseProgress.bind(this);
     }
 
     componentDidMount() {
@@ -36,7 +40,7 @@ export class Demo extends Component {
         };
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
-        if(this.state.width < 768){
+        if (this.state.width < 768) {
             this.setState({
                 currentLineWidth: 8
             })
@@ -100,7 +104,26 @@ export class Demo extends Component {
         })
     }
 
+    increaseProgress() {
+        let progress = this.state.progress + 1;
+        if (progress >= this.state.currentProgressGoal || progress >= 100) {
+            clearTimeout(this.tm);
+            if (progress >= 100) {
+                progress = 100;
+            }
+            this.setState({
+                currentProgressGoal: this.state.currentProgressGoal + 15,
+                progress
+            });
+            return;
+        }
+        this.setState({progress});
+        this.tm = setTimeout(this.increaseProgress, 20);
+    }
+
+
     onNext() {
+        this.increaseProgress();
         if (this.state.currentIndex === this.state.fonts.length - 1) {
             return;
         }
@@ -114,7 +137,7 @@ export class Demo extends Component {
     onPrev() {
         if (this.state.currentIndex === 0) {
             return;
-        } else if (this.state.currentIndex === 1){
+        } else if (this.state.currentIndex === 1) {
             this.setState({
                 descExists: true
             });
@@ -122,7 +145,7 @@ export class Demo extends Component {
 
         this.setState({
             animation: 'down',
-            currentIndex: this.state.currentIndex + -1
+            currentIndex: this.state.currentIndex - 1
         })
     }
 
@@ -130,7 +153,6 @@ export class Demo extends Component {
         let drawerHighlighter = this.state.drawerHighlighter;
         drawerHighlighter[this.state.currentDrawerHighlighter] = '1px solid black';
         drawerHighlighter[index] = '1px solid red';
-        this.setState({});
 
         this.setState({
             currentLineColor: lineColor,
@@ -145,7 +167,6 @@ export class Demo extends Component {
         if (this.state.width >= 768) {
             lineWidthList = this.state.defaultLineWidthList;
         }
-
         return (
             <div className='demo'>
                 <Header history={this.props.history}
@@ -226,7 +247,17 @@ export class Demo extends Component {
                     <div className='pre-button' onTouchTap={this.onPrev}>
                         <div className='button-contents'>＜ 이전</div>
                     </div>
-                    <div className='progress'></div>
+                    <div className='progress'>
+                        <Line percent={this.state.progress}
+                              strokeLinecap='square'
+                              strokeColor='#44bc40'
+                              trailWidth='0'
+                              style={{
+                                  height: '100%',
+                                  width: '100%',
+                                  borderRadius: 5
+                              }}/>
+                    </div>
                     <div className='next-button' onTouchTap={this.onNext}>
                         <div className='button-contents'>다음 ＞</div>
                     </div>
