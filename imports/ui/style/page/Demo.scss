@@ -27,7 +27,7 @@ $mobile-drawer-small: 8px;
 
 .demo-desc-wrapper {
   position: fixed;
-  top: 130px;
+  top: 100px;
   text-align: center;
   width: 100%;
 
@@ -43,14 +43,14 @@ $mobile-drawer-small: 8px;
 
   .demo-desc-contents {
     font-size: 0.8em;
-    line-height: 1.8em;
+    line-height: 1.5em;
     color: #888;
   }
   @media (max-width: $mobile) {
     top: 90px;
     .demo-desc-contents {
-      font-size: 0.7em;
-      line-height: 2em;
+      font-size: 0.6em;
+      line-height: 1.6em;
     }
   }
 }
@@ -170,7 +170,7 @@ $mobile-drawer-small: 8px;
   position: absolute;
   height: $default-content-height;
   bottom: 0;
-  border: 1px solid red;
+  //border: 1px solid red;
   padding: $default-padding;
   width: calc(100% - #{$default-padding/0.5});
 
@@ -199,19 +199,39 @@ $mobile-drawer-small: 8px;
   .pre-button, .next-button {
     width: $default-button-width;
     height: $default-content-height;
-    border: 1px solid blue;
+    background-color: #333;
+    border-radius: 4px;
+    box-shadow: 0 4px gray;
+    :active{
+      background-color: #999;
+      border-radius: 4px;
+    }
     @media (max-width: $mobile) {
+      box-shadow: 0 2px gray;
       height: $mobile-content-height;
       width: $mobile-button-width;
     }
+
   }
 
   .pre-button {
+    display: table;
     float: left;
   }
 
   .next-button {
+    display: table;
     float: right;
+  }
+
+  .button-contents {
+    color: white;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    @media (max-width: $mobile) {
+      font-size: 0.8em;
+    }
   }
 }
 

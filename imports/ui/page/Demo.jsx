@@ -11,7 +11,7 @@ export class Demo extends Component {
         this.state = {
             width: 0,
             height: 0,
-            fonts: '폰토는딥러닝기반폰트생성서비스입니다',
+            fonts: '에?훌련된망나니',
             currentIndex: 0,
             contextDic: {},
             defaultLineWidthList: [16, 32, 40],
@@ -76,9 +76,9 @@ export class Demo extends Component {
                         <div className="font" style={{fontSize: canvasSize * 0.9}}>
                             {this.state.fonts[i]}
                         </div>
-                        <Canvas id={'canvas-' + this.state.fonts[i]}
+                        <Canvas id={'canvas-' + this.state.fonts.charCodeAt(i).toString(16)}
                                 getContext={this.getContext}
-                                image={this.state.contextDic['canvas-' + this.state.fonts[i]]}
+                                image={this.state.contextDic['canvas-' + this.state.fonts.charCodeAt(i).toString(16)]}
                                 className='canvas'
                                 lineWidth={this.state.currentLineWidth}
                                 strokeStyle={this.state.currentLineColor}
@@ -223,9 +223,13 @@ export class Demo extends Component {
                 </div>
 
                 <div className='bottom-wrapper'>
-                    <div className='pre-button' onTouchTap={this.onPrev}></div>
+                    <div className='pre-button' onTouchTap={this.onPrev}>
+                        <div className='button-contents'>＜ 이전</div>
+                    </div>
                     <div className='progress'></div>
-                    <div className='next-button' onTouchTap={this.onNext}></div>
+                    <div className='next-button' onTouchTap={this.onNext}>
+                        <div className='button-contents'>다음 ＞</div>
+                    </div>
                 </div>
             </div>
         );
