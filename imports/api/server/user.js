@@ -36,7 +36,8 @@ Meteor.methods({
                 password: password,
                 profile: {
                     createdAt: new Date(),
-                    profileImageUrl: ''
+                    profileImageUrl: '',
+                    count: 0
                 }
             });
             logger.log('info', 'signup [success]: user created / email:%s', email);

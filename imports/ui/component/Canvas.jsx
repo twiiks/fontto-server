@@ -22,8 +22,11 @@ export class Canvas extends Component {
     }
 
     ctx() {
-        this.props.getContext(this.canvas().getContext('2d'),
-            this.canvas().getContext('2d').getImageData(0, 0, this.props.height, this.props.width));
+        this.props.getContext(
+            this.canvas(),
+            this.canvas().getContext('2d'),
+            this.canvas().getContext('2d').getImageData(0, 0, this.props.height, this.props.width)
+        );
         if (this.props.image && this.state.drawCounter === 1) {
             this.canvas().getContext('2d').putImageData(this.props.image, 0, 0);
             this.setState({drawCounter: this.state.drawCounter + 1});
@@ -33,7 +36,7 @@ export class Canvas extends Component {
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         const canvas = this.canvas();
         const ctx = this.ctx();
     }

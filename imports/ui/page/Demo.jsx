@@ -14,7 +14,7 @@ export class Demo extends Component {
             height: 0,
             fonts: '에?훌련된망나니',
             currentIndex: 0,
-            contextDic: {},
+            contextObj: {},
             defaultLineWidthList: [16, 32, 40],
             mobileLineWidthList: [8, 16, 24],
             currentLineWidth: 12,
@@ -24,7 +24,10 @@ export class Demo extends Component {
             currentDrawerHighlighter: 0,
             descExists: true,
             progress: 0,
-            currentProgressGoal: 0
+            currentProgressGoal: 0,
+            fontsB64Images: {},
+
+            showModal: false,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onNext = this.onNext.bind(this);
@@ -32,7 +35,8 @@ export class Demo extends Component {
         this.getContext = this.getContext.bind(this);
         this.onSelectDrawer = this.onSelectDrawer.bind(this);
         this.increaseProgress = this.increaseProgress.bind(this);
-        this.decreaseProgress = this.decreaseProgress.bind(this);
+        this.onGenerate = this.onGenerate.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentDidMount() {
@@ -46,7 +50,6 @@ export class Demo extends Component {
                 currentLineWidth: 8
             })
         }
-
     }
 
     componentWillUnmount() {
@@ -83,7 +86,7 @@ export class Demo extends Component {
                         </div>
                         <Canvas id={'canvas-' + this.state.fonts.charCodeAt(i).toString(16)}
                                 getContext={this.getContext}
-                                image={this.state.contextDic['canvas-' + this.state.fonts.charCodeAt(i).toString(16)]}
+                                image={this.state.contextObj['canvas-' + this.state.fonts.charCodeAt(i).toString(16)]}
                                 className='canvas'
                                 lineWidth={this.state.currentLineWidth}
                                 strokeStyle={this.state.currentLineColor}
@@ -96,12 +99,16 @@ export class Demo extends Component {
         return canvasList;
     }
 
-    getContext(ctx, image) {
-        let newContextDic = this.state.contextDic;
-        newContextDic[ctx.canvas.id] = image;
+    getContext(canvas, ctx, image) {
+        let newContextObj = this.state.contextObj;
+        newContextObj[ctx.canvas.id] = image;
+
+        let newFontsB64Images = this.state.fontsB64Images;
+        newFontsB64Images[ctx.canvas.id.split("-")[1]] =
+            canvas.toDataURL("image/jpeg").replace(/^data:image\/(png|jpg);base64,/, "");
 
         this.setState({
-            contextDic: newContextDic
+            contextObj: newContextObj
         })
     }
 
@@ -118,23 +125,7 @@ export class Demo extends Component {
             return;
         }
         this.setState({progress});
-        this.tm = setTimeout(this.increaseProgress, 30, goal);
-    }
-
-    decreaseProgress(goal) {
-        let progress = this.state.progress - 1;
-        if (progress <= goal || progress <= 0) {
-            clearTimeout(this.tm);
-            if (progress <= 0) {
-                progress = 0;
-            }
-            this.setState({
-                progress
-            });
-            return;
-        }
-        this.setState({progress});
-        this.tm = setTimeout(this.decreaseProgress, 30, goal);
+        this.tm = setTimeout(this.increaseProgress, 20, goal);
     }
 
     onNext() {
@@ -162,7 +153,6 @@ export class Demo extends Component {
             animation: 'down',
             currentIndex: this.state.currentIndex - 1,
         });
-        this.decreaseProgress((this.state.currentIndex - 1) / (this.state.fonts.length - 1) * 100);
     }
 
     onSelectDrawer(index, lineWidth, lineColor) {
@@ -175,6 +165,19 @@ export class Demo extends Component {
             currentLineWidth: lineWidth,
             currentDrawerHighlighter: index,
             drawerHighlighter: drawerHighlighter
+        })
+    }
+
+    onGenerate() {
+        console.log(this.state.fontsB64Images);
+        this.setState({
+            showModal: true
+        })
+    }
+
+    closeModal() {
+        this.setState({
+            showModal: false
         })
     }
 
@@ -268,7 +271,7 @@ export class Demo extends Component {
                         {this.state.progress !== 100 ?
                             <div className='desc'>데모 폰트 생성 {this.state.progress}%</div>
                             :
-                            <div className='desc complete'>클릭하여 폰트 생성하기</div>
+                            <div className='desc complete' onTouchTap={this.onGenerate}>클릭하여 폰트 생성하기</div>
                         }
 
                         <Line percent={this.state.progress}
@@ -285,6 +288,15 @@ export class Demo extends Component {
                         <div className='button-contents'>다음 ＞</div>
                     </div>
                 </div>
+
+                {this.state.showModal ?
+                    <div>
+                        <div className='progress-modal-wrapper' onTouchTap={this.closeModal}>
+                        </div>
+                        <div className='progress-modal'>
+                        </div>
+                    </div>
+                    : null}
             </div>
         );
     }
