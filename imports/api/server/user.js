@@ -75,11 +75,16 @@ Meteor.methods({
         }
     },
 
-    getUserEmailById: function (userId) {
+    getUserEmailById: function () {
         if (Meteor.user())
-            return Meteor.users.find({_id: userId}).fetch()[0].emails[0].address;
-        else {
-            throw new Meteor.Error(500, resultObj('error', 'NOT_LOGGED_IN'))
-        }
+            return Meteor.users.find({_id: Meteor.userId()})
+                .fetch()[0].emails[0].address;
+    },
+
+    updateUserCount: function () {
+        Meteor.users.update({_id: Meteor.userId()},
+            {$inc: {'profile.count': 1}})
     }
+
+
 });

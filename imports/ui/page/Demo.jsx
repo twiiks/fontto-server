@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import {Header} from '../component/Header';
 import {Canvas} from '../component/Canvas';
 import {Line} from 'rc-progress';
+import {Dialog} from "material-ui";
+import {Button} from "../component/Button";
+
+
+import {promise} from "../../api/client/promise";
 
 import '../style/page/Demo.scss';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -26,7 +31,6 @@ export class Demo extends Component {
             progress: 0,
             currentProgressGoal: 0,
             fontsB64Images: {},
-
             showModal: false,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -36,7 +40,7 @@ export class Demo extends Component {
         this.onSelectDrawer = this.onSelectDrawer.bind(this);
         this.increaseProgress = this.increaseProgress.bind(this);
         this.onGenerate = this.onGenerate.bind(this);
-        this.closeModal = this.closeModal.bind(this);
+        this.onConfirm = this.onConfirm.bind(this);
     }
 
     componentDidMount() {
@@ -85,6 +89,7 @@ export class Demo extends Component {
                             {this.state.fonts[i]}
                         </div>
                         <Canvas id={'canvas-' + this.state.fonts.charCodeAt(i).toString(16)}
+                                ref={'canvas-' + this.state.fonts.charCodeAt(i).toString(16)}
                                 getContext={this.getContext}
                                 image={this.state.contextObj['canvas-' + this.state.fonts.charCodeAt(i).toString(16)]}
                                 className='canvas'
@@ -102,10 +107,6 @@ export class Demo extends Component {
     getContext(canvas, ctx, image) {
         let newContextObj = this.state.contextObj;
         newContextObj[ctx.canvas.id] = image;
-
-        let newFontsB64Images = this.state.fontsB64Images;
-        newFontsB64Images[ctx.canvas.id.split("-")[1]] =
-            canvas.toDataURL("image/jpeg").replace(/^data:image\/(png|jpg);base64,/, "");
 
         this.setState({
             contextObj: newContextObj
@@ -169,16 +170,36 @@ export class Demo extends Component {
     }
 
     onGenerate() {
-        console.log(this.state.fontsB64Images);
-        this.setState({
-            showModal: true
-        })
+
+        let newFontsB64Images = this.state.fontsB64Images;
+        let unicodes = [];
+        for (let i in this.state.fonts) {
+            let unicode = this.state.fonts.charCodeAt(i).toString(16);
+            unicodes.push(unicode.toUpperCase());
+            let ref = 'canvas-' + unicode;
+            newFontsB64Images[unicode] = this.refs[ref].getCanvasBuffer();
+        }
+
+
+        promise('uploadHandwritesToS3', [this.state.fontsB64Images])
+            .then()
+            .then(Meteor.call('updateUserCount'))
+            .then(Meteor.call('getUserEmailById'))
+            .then(Meteor.call('enqueue', unicodes))
+            
+            .then(function () {
+                this.setState({showModal: true});
+            }.bind(this))
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
-    closeModal() {
-        this.setState({
-            showModal: false
-        })
+    onConfirm() {
+        this.props.history.push({
+            pathname: '/',
+            state: {}
+        });
     }
 
     render() {
@@ -268,7 +289,7 @@ export class Demo extends Component {
                         <div className='button-contents'>＜ 이전</div>
                     </div>
                     <div className='progress'>
-                        {this.state.progress !== 100 ?
+                        {this.state.progress !== 100 || this.state.currentIndex !== this.state.fonts.length - 1 ?
                             <div className='desc'>데모 폰트 생성 {this.state.progress}%</div>
                             :
                             <div className='desc complete' onTouchTap={this.onGenerate}>클릭하여 폰트 생성하기</div>
@@ -289,14 +310,39 @@ export class Demo extends Component {
                     </div>
                 </div>
 
-                {this.state.showModal ?
-                    <div>
-                        <div className='progress-modal-wrapper' onTouchTap={this.closeModal}>
+                <Dialog
+                    actions={
+                        <Button
+                            className='confirm-modal-button'
+                            label="완료하기"
+                            primary={true}
+                            fullWidth={true}
+                            backgroundColor='#fdfdfd'
+                            labelColor='#333'
+                            onTouchTap={this.onConfirm}
+                        />
+                    }
+                    modal={true}
+                    open={this.state.showModal}
+                    contentStyle={{width: '80%'}}
+                    autoDetectWindowHeight={false}
+                >
+                    <div className='confirm-modal-head'>
+                        <div className='title'>
+                            데모
                         </div>
-                        <div className='progress-modal'>
+                        <div className='desc'>
+                            데모가 완료되었습니다!
                         </div>
                     </div>
-                    : null}
+                    <br/><br/><br/>
+                    <div>작성하신 글자는 '{this.state.fonts}' 입니다.</div>
+                    <br/>
+                    <div className="confirm-desc">필체를 분석하여 글자를 만들어내는 데 약 2분이 소요됩니다.
+                        완료되는데로 회원가입 할 때 작성했던 메일로 보내드리겠습니다!
+                        fontto 에 관심을 가져주셔서 감사합니다. :)
+                    </div>
+                </Dialog>
             </div>
         );
     }

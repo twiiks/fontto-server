@@ -17,7 +17,7 @@ import {Index} from '../../ui/page/Index';
 import {MyPage} from '../../ui/page/MyPage';
 import {Test} from '../../ui/page/Test';
 import {Demo} from "../../ui/page/Demo";
-
+import {Write} from "../../ui/page/Write";
 
 Meteor.startup(() => {
     injectTapEventPlugin();
@@ -30,6 +30,7 @@ Meteor.startup(() => {
                         <Route exact path="/test" component={Test}/>
                         <Route exact path="/mypage" component={MyPage}/>
                         <Route exact path="/demo" component={Demo}/>
+                        <Route exact path="/write" component={Write}/>
                     </Switch>
                 </App>
             </MuiThemeProvider>
