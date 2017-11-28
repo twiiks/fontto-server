@@ -36,7 +36,6 @@ Meteor.methods({
                 password: password,
                 profile: {
                     createdAt: new Date(),
-                    profileImageUrl: '',
                     count: 0
                 }
             });

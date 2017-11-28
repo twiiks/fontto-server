@@ -20,7 +20,6 @@ export class Test extends Component {
         };
         this.enqueueTest = this.enqueueTest.bind(this);
         this.onQueueNameChange = this.onQueueNameChange.bind(this);
-        this.onUserIdChange = this.onUserIdChange.bind(this);
         this.onUnicodesChange = this.onUnicodesChange.bind(this);
     }
 
@@ -38,6 +37,7 @@ export class Test extends Component {
 
     onUnicodesChange(e) {
         const unicodes = e.target.value.split(' ');
+        this.onUserIdChange = this.onUserIdChange.bind(this);
         this.setState({
             unicodes: unicodes
         })

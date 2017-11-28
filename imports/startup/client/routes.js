@@ -16,6 +16,7 @@ import {App} from '../../ui/App';
 import {Index} from '../../ui/page/Index';
 import {MyPage} from '../../ui/page/MyPage';
 import {Test} from '../../ui/page/Test';
+import {Demo_deprecated} from "../../ui/page/Demo_deprecated";
 import {Demo} from "../../ui/page/Demo";
 import {Write} from "../../ui/page/Write";
 
