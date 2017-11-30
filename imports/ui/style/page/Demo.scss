@@ -112,6 +112,15 @@ $default-header-height: 80px;
   .informations {
     height: 50%;
     //background-color: yellow;
+    .text-infos {
+      .can-info {
+
+      }
+
+      .accuracy {
+
+      }
+    }
   }
 
   @media (max-width: $mobile) {

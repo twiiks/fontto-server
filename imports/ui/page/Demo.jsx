@@ -17,7 +17,7 @@ export class Demo extends Component {
             contextObj: {},
             canvasLineWidth: 16,
             canvasStrokeStyle: '#333',
-
+            koreanUnicodeObj: {}
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -34,6 +34,13 @@ export class Demo extends Component {
         };
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+
+        let koreanUnicodes = require('../../../public/constants/korean-unicodes.json');
+        let koreanUnicodesObj = {};
+        for (let i = 0; i < 2000; i++) {
+            koreanUnicodesObj[koreanUnicodes.kr[i]] = i
+        }
+        this.setState({koreanUnicodeObj: koreanUnicodesObj})
     }
 
     componentWillUnmount() {
@@ -113,17 +120,18 @@ export class Demo extends Component {
     drawMatrix() {
         let matrix = [];
         let koreanUnicodes = require('../../../public/constants/korean-unicodes.json');
-        console.log(koreanUnicodes);
         for (let i = 0; i < 2000; i++) {
             matrix.push(<div
-                key={i} style={{
-                height: '1em',
-                width: '1em',
-                float: 'left',
-                padding: 1,
-                fontSize: '0.1em',
-                fontFamily: 'Nanum Gothic'
-            }}>{koreanUnicodes.kr[i]}</div>)
+                key={i}
+                ref={'cell-' + i}
+                style={{
+                    height: '1em',
+                    width: '1em',
+                    float: 'left',
+                    padding: 1,
+                    fontSize: '0.1em',
+                    fontFamily: 'Nanum Gothic'
+                }}>{koreanUnicodes.kr[i]}</div>)
         }
         return matrix;
     }
