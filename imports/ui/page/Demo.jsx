@@ -15,11 +15,15 @@ export class Demo extends Component {
             fonts: '영원히끓을거라믿었던나의젊음돌아봤더니후회뿐',
             currentIndex: 0,
             contextObj: {},
-            canvasLineWidth: 5
+            canvasLineWidth: 16,
+            canvasStrokeStyle: '#333'
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
         this.getCanvas = this.getCanvas.bind(this);
+        this.onNext = this.onNext.bind(this);
+        this.changeLignWidth = this.changeLignWidth.bind(this);
+        this.changeToEraser = this.changeToEraser.bind(this);
     }
 
     componentDidMount() {
@@ -45,7 +49,7 @@ export class Demo extends Component {
     }
 
 
-    getContext(canvas, ctx, image) {
+    getContext(ctx, image) {
         let newContextObj = this.state.contextObj;
         newContextObj[ctx.canvas.id] = image;
 
@@ -61,11 +65,15 @@ export class Demo extends Component {
             if (this.state.width < 768)
                 canvasSize = this.state.width / 2 - 2
         }
+
         return (
             <Canvas getContext={this.getContext}
                     id={canvasId}
+                    ref={canvasId}
                     width={canvasSize}
                     height={canvasSize}
+                    contextObj={this.state.contextObj}
+                    strokeStyle={this.state.canvasStrokeStyle}
                     lineWidth={this.state.canvasLineWidth}>
             </Canvas>
         )
@@ -73,6 +81,27 @@ export class Demo extends Component {
 
     makeButtonConfig() {
 
+    }
+
+    changeLignWidth(size) {
+        this.setState({
+            canvasLineWidth: size,
+            canvasStrokeStyle: '#333'
+        })
+    }
+
+    changeToEraser() {
+        this.setState({
+            canvasStrokeStyle: '#fff'
+        })
+    }
+
+
+    onNext() {
+        console.log(this.state.contextObj);
+        this.setState({
+            currentIndex: this.state.currentIndex + 1
+        })
     }
 
     getUnicode(index) {
@@ -105,17 +134,39 @@ export class Demo extends Component {
                         <div className='canvas-all-wrapper'>
                             <div className='canvas-all'>
                                 <div className='canvas-wrapper'>
-                                    {this.getCanvas(0)}
+                                    {this.getCanvas(this.state.currentIndex)}
                                 </div>
                                 <div className='write-info'>
-                                    <div className='write-config'>
-
-                                    </div>
                                     <div className='write-button-wrapper'>
-                                        <div className='prev-button'>
-                                            ＜ 이전
+                                        <div className='write-config'>
+                                            <div className='config-wrapper'>
+                                                <div className='config pencil-ico'>
+                                                    <img src='/image/ico-pencil.png'/>
+                                                </div>
+                                            </div>
+                                            <div className='config-wrapper'
+                                                 onTouchTap={() => this.changeLignWidth(38)}>
+                                                <div className='config pencil big'>
+                                                </div>
+                                            </div>
+                                            <div className='config-wrapper'
+                                                 onTouchTap={() => this.changeLignWidth(24)}>
+                                                <div className='config pencil mid'>
+                                                </div>
+                                            </div>
+                                            <div className='config-wrapper'
+                                                 onTouchTap={() => this.changeLignWidth(16)}>
+                                                <div className='config pencil small'>
+                                                </div>
+                                            </div>
+                                            <div className='config-wrapper'
+                                                 onTouchTap={() => this.changeToEraser()}>
+                                                <div className='config eraser'>
+                                                    <img src='/image/ico-eraser.png'/>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className='next-button'>
+                                        <div className='next-button' onTouchTap={this.onNext}>
                                             다음 ＞
                                         </div>
                                     </div>

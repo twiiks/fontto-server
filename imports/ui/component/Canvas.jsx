@@ -9,7 +9,6 @@ export class Canvas extends Component {
             isDrawing: false,
             lastX: 0,
             lastY: 0,
-            drawCounter: 1
         };
         this.draw = this.draw.bind(this);
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -23,16 +22,15 @@ export class Canvas extends Component {
 
     ctx() {
         this.props.getContext(
-            this.canvas(),
             this.canvas().getContext('2d'),
             this.canvas().getContext('2d').getImageData(0, 0, this.props.height, this.props.width)
         );
-        if (this.props.image && this.state.drawCounter === 1) {
-            this.canvas().getContext('2d').putImageData(this.props.image, 0, 0);
-            this.setState({drawCounter: this.state.drawCounter + 1});
-            return this.canvas().getContext('2d');
-        } else {
-            return this.canvas().getContext('2d');
+        return this.canvas().getContext('2d');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.id !== this.props.id) {
+            this.clearCanvas();
         }
     }
 

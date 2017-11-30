@@ -19,9 +19,10 @@ $default-header-height: 80px;
 
   .handwrite-wrapper {
     height: 50%;
+    padding: 2%;
 
     .font-info-wrapper {
-      width: 50%;
+      width: 47%;
       height: 100%;
       display: table;
       float: left;
@@ -37,36 +38,77 @@ $default-header-height: 80px;
 
     .canvas-all-wrapper {
       float: right;
-      width: 45%;
+      width: 43%;
       height: 100%;
       //background-color: #aaaaaa;
       display: table;
       .canvas-all {
         display: table-cell;
         vertical-align: middle;
+
         .write-info {
           .write-button-wrapper {
-            .prev-button, .next-button {
-              width: 48%;
+            .write-config {
+              float: left;
+              width: 75%;
+              margin: 1% 0;
+              height: 38px;
+              //background-color: red;
+              .config-wrapper {
+                width: 38px;
+                height: 38px;
+                margin: 0 4px;
+                float: left;
+                position: relative;
+                //background-color: royalblue;
+                .config {
+                  img {
+                    width: 38px;
+                    height: 38px;
+                  }
+                }
+                .pencil {
+                  position: absolute;
+                  bottom: 0;
+                  background-color: black;
+                }
+                .big {
+                  width: 38px;
+                  height: 38px;
+                  border-radius: 19px;
+                }
+                .mid {
+                  width: 24px;
+                  height: 24px;
+                  left: 5px;
+                  border-radius: 12px;
+                }
+                .small {
+                  width: 16px;
+                  height: 16px;
+                  border-radius: 8px;
+                }
+              }
+            }
+
+            .next-button {
+              width: 25%;
               background-color: #333333;
               text-align: center;
               color: white;
               padding: 10px 0;
               margin: 1% 0;
               border-radius: 5px;
-            }
-            .prev-button {
-              float: left;
-            }
-            .next-button {
               float: right;
             }
+
           }
         }
       }
     }
 
   }
+
   .informations {
     height: 50%;
     background-color: yellow;
@@ -75,4 +117,5 @@ $default-header-height: 80px;
   @media (max-width: $mobile) {
 
   }
+
 }
