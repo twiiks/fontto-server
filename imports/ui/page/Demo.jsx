@@ -16,7 +16,8 @@ export class Demo extends Component {
             currentIndex: 0,
             contextObj: {},
             canvasLineWidth: 16,
-            canvasStrokeStyle: '#333'
+            canvasStrokeStyle: '#333',
+
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -24,6 +25,7 @@ export class Demo extends Component {
         this.onNext = this.onNext.bind(this);
         this.changeLignWidth = this.changeLignWidth.bind(this);
         this.changeToEraser = this.changeToEraser.bind(this);
+        this.drawMatrix = this.drawMatrix.bind(this);
     }
 
     componentDidMount() {
@@ -108,6 +110,24 @@ export class Demo extends Component {
         return this.state.fonts.charCodeAt(index).toString(16).toUpperCase();
     }
 
+    drawMatrix() {
+        let matrix = [];
+        let koreanUnicodes = require('../../../public/constants/korean-unicodes.json');
+        console.log(koreanUnicodes);
+        for (let i = 0; i < 2000; i++) {
+            matrix.push(<div
+                key={i} style={{
+                height: '1em',
+                width: '1em',
+                float: 'left',
+                padding: 1,
+                fontSize: '0.1em',
+                fontFamily: 'Nanum Gothic'
+            }}>{koreanUnicodes.kr[i]}</div>)
+        }
+        return matrix;
+    }
+
 
     render() {
         let fontSize = 384;
@@ -184,7 +204,7 @@ export class Demo extends Component {
                             </div>
                         </div>
                         <div className='matrix-wrapper'>
-
+                            {this.drawMatrix()}
                         </div>
                     </div>
                 </div>
