@@ -17,7 +17,7 @@ export class Demo extends Component {
             '엄마의된장찌개가있는지확인하란소리를듣게됐다아직저는삼학년일뿐인걸요음료를먹고싶으면차가운걸로먹으십시오',
             currentIndex: 0,
             contextObj: {},
-            canvasLineWidth: 16,
+            canvasLineWidth: 24,
             canvasStrokeStyle: '#000',
             drawKind: [1, 0.3, 1, 0.3, 0.3],
             koreanUnicodeObj: {}
