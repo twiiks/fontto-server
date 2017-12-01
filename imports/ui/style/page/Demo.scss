@@ -121,13 +121,13 @@ $default-header-height: 80px;
         font-size: 2em;
       }
       .can-info {
-        width: 45%;
+        width: 50%;
         float: left;
         margin-left: 5%;
       }
 
       .accuracy {
-        width: 45%;
+        width: 40%;
         float: right;
         text-align: right;
         margin-right: 5%;
@@ -156,12 +156,3 @@ $default-header-height: 80px;
 .left-leave.left-leave-active {
   display: none !important;
 }
-
-//.left-appear {
-//  transform: translateX(-100%);
-//}
-//
-//.left-appear.left-appear-active {
-//  transform: translateX(0%);
-//  transition: transform .3s ease-in;
-//}

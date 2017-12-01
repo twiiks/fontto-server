@@ -20,7 +20,11 @@ export class Demo extends Component {
             canvasLineWidth: 24,
             canvasStrokeStyle: '#000',
             drawKind: [1, 0.3, 1, 0.3, 0.3],
-            koreanUnicodeObj: {}
+            koreanUnicodeObj: {},
+            canWriteCount: 0,
+            increasingCanWriteCount: 0,
+            accuracy: 0,
+            increasingAccuracy: 0.0
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -30,6 +34,9 @@ export class Demo extends Component {
         this.changeToEraser = this.changeToEraser.bind(this);
         this.drawMatrix = this.drawMatrix.bind(this);
         this.drawFonts = this.drawFonts.bind(this);
+        this.increaseCanWriteCount = this.increaseCanWriteCount.bind(this);
+        this.setAccuracy = this.setAccuracy.bind(this);
+        this.increaseAccuracy = this.increaseAccuracy.bind(this);
     }
 
     componentDidMount() {
@@ -41,10 +48,15 @@ export class Demo extends Component {
 
         let koreanUnicodes = require('../../../public/constants/korean-unicodes.json');
         let koreanUnicodesObj = {};
+        let visibleList = [];
         for (let i = 0; i < 2000; i++) {
-            koreanUnicodesObj[koreanUnicodes.kr[i]] = i
+            koreanUnicodesObj[koreanUnicodes.kr[i]] = i;
+            visibleList[i] = 0;
         }
-        this.setState({koreanUnicodeObj: koreanUnicodesObj})
+        this.setState({
+            koreanUnicodeObj: koreanUnicodesObj,
+            visibleList: visibleList
+        })
     }
 
     componentWillUnmount() {
@@ -121,10 +133,56 @@ export class Demo extends Component {
         })
     }
 
+    setAccuracy(canWriteCount) {
+        let tempRatio = Math.log(canWriteCount) / Math.log(2350);
+        tempRatio *= 100;
+        this.setState({accuracy: tempRatio.toFixed(3)});
+        return tempRatio.toFixed(3);
+    }
+
+    increaseCanWriteCount(goal) {
+        let progress = this.state.increasingCanWriteCount + 1;
+        if (progress >= goal) {
+            clearTimeout(this.tm);
+            return;
+        }
+        this.setState({increasingCanWriteCount: progress});
+        this.tm = setTimeout(this.increaseCanWriteCount, 10, goal);
+    }
+
+    increaseAccuracy(goal) {
+        let random = Math.random();
+        let progress = parseFloat(this.state.increasingAccuracy) +
+            parseFloat(random);
+        progress = progress.toFixed(3);
+        if (parseFloat(progress) >= parseFloat(goal)) {
+            clearTimeout(this.tm2);
+            return;
+        }
+        this.setState({increasingAccuracy: progress});
+        this.tm2 = setTimeout(this.increaseAccuracy, 10, goal);
+    }
 
     onNext() {
+        let tempVisibleList = this.state.visibleList;
+        let tempCanWriteCount = this.state.canWriteCount;
+        for (let i = 0; i < 36; i++) {
+            let index = Math.floor(Math.random() * 2000);
+            if (tempVisibleList[index] !== 1) tempCanWriteCount++;
+            tempVisibleList[index] = 1;
+        }
+        let tempAccuracy = this.setAccuracy(tempCanWriteCount);
+        console.log(tempAccuracy);
+
+        this.tm = setTimeout(this.increaseCanWriteCount, 10, tempCanWriteCount);
+        this.tm2 = setTimeout(this.increaseAccuracy, 10, tempAccuracy);
+
+        tempVisibleList[this.state.koreanUnicodeObj[this.state.fonts[this.state.currentIndex]]] = 1;
+
         this.setState({
-            currentIndex: this.state.currentIndex + 1
+            currentIndex: this.state.currentIndex + 1,
+            visibleList: tempVisibleList,
+            canWriteCount: tempCanWriteCount
         })
     }
 
@@ -136,18 +194,32 @@ export class Demo extends Component {
         let matrix = [];
         let koreanUnicodes = require('../../../public/constants/korean-unicodes.json');
         for (let i = 0; i < 2000; i++) {
-            matrix.push(<div
-                key={i}
-                ref={'cell-' + i}
-                style={{
-                    height: '1em',
-                    width: '1em',
-                    float: 'left',
-                    padding: 1,
-                    fontSize: '0.1em',
-                    fontFamily: 'Nanum Gothic'
-                }}>{koreanUnicodes.kr[i]}</div>)
+            let visibility;
+            if (!this.state.visibleList) {
+                visibility = 'hidden';
+            } else if (this.state.visibleList[i] === 1) {
+                visibility = 'visible';
+            } else {
+                visibility = 'hidden';
+            }
+
+            matrix.push(
+                <div
+                    key={i}
+                    ref={'cell-' + i}
+                    style={{
+                        visibility: visibility,
+                        height: '1em',
+                        width: '1em',
+                        float: 'left',
+                        padding: 1,
+                        fontSize: '0.1em',
+                        fontFamily: 'Nanum Gothic'
+                    }}>{koreanUnicodes.kr[i]}
+                </div>
+            )
         }
+
         return matrix;
     }
 
@@ -211,13 +283,13 @@ export class Demo extends Component {
                                             <div className='config-wrapper'
                                                  onTouchTap={() => this.changeLineWidth(38)}>
                                                 <div style={{opacity: this.state.drawKind[1]}}
-                                                    className='config pencil big'>
+                                                     className='config pencil big'>
                                                 </div>
                                             </div>
                                             <div className='config-wrapper'
                                                  onTouchTap={() => this.changeLineWidth(24)}>
                                                 <div style={{opacity: this.state.drawKind[2]}}
-                                                    className='config pencil mid'>
+                                                     className='config pencil mid'>
                                                 </div>
                                             </div>
                                             <div className='config-wrapper'
@@ -230,7 +302,7 @@ export class Demo extends Component {
                                                  onTouchTap={() => this.changeToEraser()}>
                                                 <div className='config eraser'>
                                                     <img style={{opacity: this.state.drawKind[4]}}
-                                                        src='/image/ico-eraser.png'/>
+                                                         src='/image/ico-eraser.png'/>
                                                 </div>
                                             </div>
                                         </div>
@@ -245,10 +317,10 @@ export class Demo extends Component {
                     <div className='informations'>
                         <div className='text-infos'>
                             <div className='can-info'>
-                                2,350 자 중 <b>112</b> 자 생성가능
+                                2,350 자 중 <b>{this.state.increasingCanWriteCount}</b> 자 생성가능
                             </div>
                             <div className='accuracy'>
-                                필체 유사도 : <b>12</b> %
+                                필체 유사도 : <b>{this.state.increasingAccuracy}</b> %
                             </div>
                         </div>
                         <div className='matrix-wrapper'>
