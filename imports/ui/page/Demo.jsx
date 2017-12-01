@@ -19,7 +19,7 @@ export class Demo extends Component {
             contextObj: {},
             canvasLineWidth: 16,
             canvasStrokeStyle: '#000',
-            drawKind: [1, 1, 0.3, 0.3, 0.3],
+            drawKind: [1, 0.3, 1, 0.3, 0.3],
             koreanUnicodeObj: {}
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
