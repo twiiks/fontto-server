@@ -113,12 +113,23 @@ $default-header-height: 80px;
     height: 50%;
     //background-color: yellow;
     .text-infos {
+      margin-bottom: 20px;
+      height: 1.5em;
+      font-size: 1.5em;
+      b {
+        font-size: 2em;
+      }
       .can-info {
-
+        width: 45%;
+        float: left;
+        margin-left: 5%;
       }
 
       .accuracy {
-
+        width: 45%;
+        float: right;
+        text-align: right;
+        margin-right: 5%;
       }
     }
   }

@@ -12,11 +12,12 @@ export class Demo extends Component {
         this.state = {
             height: 0,
             width: 0,
-            fonts: '영원히끓을거라믿었던나의젊음돌아봤더니후회뿐',
+            fonts: '끓는라면영원히끊을꺼라믿었던나의젊음돌아보니후회뿐모자를잃어버린환자의붉은눈을봤다' +
+                    '엄마의된장찌개가있는지확인하란소리를듣게됐다아직저는삼학년일뿐인걸요음료를먹고싶으면차가운걸로먹으십시오',
             currentIndex: 0,
             contextObj: {},
             canvasLineWidth: 16,
-            canvasStrokeStyle: '#333',
+            canvasStrokeStyle: '#000',
             koreanUnicodeObj: {}
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -26,6 +27,7 @@ export class Demo extends Component {
         this.changeLignWidth = this.changeLignWidth.bind(this);
         this.changeToEraser = this.changeToEraser.bind(this);
         this.drawMatrix = this.drawMatrix.bind(this);
+        this.drawFonts = this.drawFonts.bind(this);
     }
 
     componentDidMount() {
@@ -136,6 +138,20 @@ export class Demo extends Component {
         return matrix;
     }
 
+    drawFonts() {
+        let fonts = this.state.fonts;
+        let spanFonts = [];
+        for (let i = this.state.currentIndex; i < this.state.currentIndex + 35; i++) {
+            let color = '#ddd';
+            if (i === this.state.currentIndex) color = '#111';
+            if (this.state.fonts.length < i) continue;
+            spanFonts.push(
+                <span key={'font' + i} style={{color: color}}>{fonts[i]}</span>
+            )
+        }
+
+        return spanFonts
+    }
 
     render() {
         let fontSize = 384;
@@ -151,7 +167,7 @@ export class Demo extends Component {
                         }/>
                 <div className='demo-body' style={{height: this.state.height - 80}}>
                     <div className='fonts'>
-                        {this.state.fonts}
+                        {this.drawFonts()}
                     </div>
                     <div className='handwrite-wrapper'>
                         <div className='font-info-wrapper'>
@@ -205,10 +221,10 @@ export class Demo extends Component {
                     <div className='informations'>
                         <div className='text-infos'>
                             <div className='can-info'>
-
+                                2,350 자 중 <b>112</b> 자 생성가능
                             </div>
                             <div className='accuracy'>
-
+                                필체 유사도 : <b>12</b> %
                             </div>
                         </div>
                         <div className='matrix-wrapper'>
