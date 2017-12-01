@@ -116,6 +116,7 @@ export class Demo extends Component {
         let tempDrawKind = [0.3, 0.3, 0.3, 0.3, 1];
         this.setState({
             drawKind: tempDrawKind,
+            canvasLineWidth: 24,
             canvasStrokeStyle: '#fff'
         })
     }
