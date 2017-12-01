@@ -20,6 +20,7 @@
     "rc-progress": "^2.2.4",
     "react": "^16.0.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-animate-on-change": "^1.0.1",
     "react-animate-on-scroll": "^1.3.2",
     "react-dom": "^16.0.0",
     "react-progressbar.js": "^0.2.0",

@@ -5,6 +5,7 @@ import {Canvas} from '../component/Canvas';
 import {promise} from "../../api/client/promise";
 
 import '../style/page/Demo.scss';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export class Demo extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export class Demo extends Component {
             height: 0,
             width: 0,
             fonts: '끓는라면영원히끊을꺼라믿었던나의젊음돌아보니후회뿐모자를잃어버린환자의붉은눈을봤다' +
-                    '엄마의된장찌개가있는지확인하란소리를듣게됐다아직저는삼학년일뿐인걸요음료를먹고싶으면차가운걸로먹으십시오',
+            '엄마의된장찌개가있는지확인하란소리를듣게됐다아직저는삼학년일뿐인걸요음료를먹고싶으면차가운걸로먹으십시오',
             currentIndex: 0,
             contextObj: {},
             canvasLineWidth: 16,
@@ -109,7 +110,6 @@ export class Demo extends Component {
 
 
     onNext() {
-        console.log(this.state.contextObj);
         this.setState({
             currentIndex: this.state.currentIndex + 1
         })
@@ -170,11 +170,17 @@ export class Demo extends Component {
                         {this.drawFonts()}
                     </div>
                     <div className='handwrite-wrapper'>
-                        <div className='font-info-wrapper'>
-                            <div className='font-info' style={{fontSize: fontSize}}>
-                                {this.state.fonts[this.state.currentIndex]}
+                        <ReactCSSTransitionGroup
+                            transitionName='left'
+                            transitionEnterTimeout={300}
+                            transitionLeaveTimeout={300}
+                            transitionAppearTimeout={300}>
+                            <div key={this.state.currentIndex} className='font-info-wrapper'>
+                                <div className='font-info' style={{fontSize: fontSize}}>
+                                    {this.state.fonts[this.state.currentIndex]}
+                                </div>
                             </div>
-                        </div>
+                        </ReactCSSTransitionGroup>
                         <div className='canvas-all-wrapper'>
                             <div className='canvas-all'>
                                 <div className='canvas-wrapper'>

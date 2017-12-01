@@ -27,6 +27,7 @@ $default-header-height: 80px;
       display: table;
       float: left;
       .font-info {
+        overflow: hidden;
         width: 40px;
         height: 40px;
         display: table-cell;
@@ -139,3 +140,28 @@ $default-header-height: 80px;
   }
 
 }
+
+.left-enter {
+  transform: translateX(-100%);
+}
+
+.left-enter.left-enter-active {
+  transform: translateX(0%);
+  transition: transform .3s;
+}
+
+.left-leave {
+}
+
+.left-leave.left-leave-active {
+  display: none !important;
+}
+
+//.left-appear {
+//  transform: translateX(-100%);
+//}
+//
+//.left-appear.left-appear-active {
+//  transform: translateX(0%);
+//  transition: transform .3s ease-in;
+//}
