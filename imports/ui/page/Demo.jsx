@@ -19,13 +19,14 @@ export class Demo extends Component {
             contextObj: {},
             canvasLineWidth: 16,
             canvasStrokeStyle: '#000',
+            drawKind: [1, 1, 0.3, 0.3, 0.3],
             koreanUnicodeObj: {}
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
         this.getCanvas = this.getCanvas.bind(this);
         this.onNext = this.onNext.bind(this);
-        this.changeLignWidth = this.changeLignWidth.bind(this);
+        this.changeLineWidth = this.changeLineWidth.bind(this);
         this.changeToEraser = this.changeToEraser.bind(this);
         this.drawMatrix = this.drawMatrix.bind(this);
         this.drawFonts = this.drawFonts.bind(this);
@@ -95,15 +96,26 @@ export class Demo extends Component {
 
     }
 
-    changeLignWidth(size) {
+    changeLineWidth(size) {
+        let tempDrawKind = [1, 0.3, 0.3, 0.3, 0.3];
+        if (size === 38) {
+            tempDrawKind[1] = 1;
+        } else if (size === 24) {
+            tempDrawKind[2] = 1;
+        } else if (size === 16) {
+            tempDrawKind[3] = 1;
+        }
         this.setState({
+            drawKind: tempDrawKind,
             canvasLineWidth: size,
             canvasStrokeStyle: '#333'
         })
     }
 
     changeToEraser() {
+        let tempDrawKind = [0.3, 0.3, 0.3, 0.3, 1];
         this.setState({
+            drawKind: tempDrawKind,
             canvasStrokeStyle: '#fff'
         })
     }
@@ -191,28 +203,33 @@ export class Demo extends Component {
                                         <div className='write-config'>
                                             <div className='config-wrapper'>
                                                 <div className='config pencil-ico'>
-                                                    <img src='/image/ico-pencil.png'/>
+                                                    <img style={{opacity: this.state.drawKind[0]}}
+                                                         src='/image/ico-pencil.png'/>
                                                 </div>
                                             </div>
                                             <div className='config-wrapper'
-                                                 onTouchTap={() => this.changeLignWidth(38)}>
-                                                <div className='config pencil big'>
+                                                 onTouchTap={() => this.changeLineWidth(38)}>
+                                                <div style={{opacity: this.state.drawKind[1]}}
+                                                    className='config pencil big'>
                                                 </div>
                                             </div>
                                             <div className='config-wrapper'
-                                                 onTouchTap={() => this.changeLignWidth(24)}>
-                                                <div className='config pencil mid'>
+                                                 onTouchTap={() => this.changeLineWidth(24)}>
+                                                <div style={{opacity: this.state.drawKind[2]}}
+                                                    className='config pencil mid'>
                                                 </div>
                                             </div>
                                             <div className='config-wrapper'
-                                                 onTouchTap={() => this.changeLignWidth(16)}>
-                                                <div className='config pencil small'>
+                                                 onTouchTap={() => this.changeLineWidth(16)}>
+                                                <div style={{opacity: this.state.drawKind[3]}}
+                                                     className='config pencil small'>
                                                 </div>
                                             </div>
                                             <div className='config-wrapper'
                                                  onTouchTap={() => this.changeToEraser()}>
                                                 <div className='config eraser'>
-                                                    <img src='/image/ico-eraser.png'/>
+                                                    <img style={{opacity: this.state.drawKind[4]}}
+                                                        src='/image/ico-eraser.png'/>
                                                 </div>
                                             </div>
                                         </div>
