@@ -24,6 +24,7 @@ export class Demo extends Component {
             canvasStrokeStyle: '#000',
             drawKind: [1, 0.3, 1, 0.3, 0.3],
             koreanUnicodeObj: {},
+            b64Images: {},
             canWriteCount: 0,
             increasingCanWriteCount: 0,
             accuracy: 0,
@@ -85,7 +86,6 @@ export class Demo extends Component {
     getContext(ctx, image) {
         let newContextObj = this.state.contextObj;
         newContextObj[ctx.canvas.id] = image;
-
         this.setState({
             contextObj: newContextObj
         })
@@ -185,17 +185,21 @@ export class Demo extends Component {
             tempVisibleList[index] = 1;
         }
         let tempAccuracy = this.setAccuracy(tempCanWriteCount);
-        console.log(tempAccuracy);
 
         this.tm = setTimeout(this.increaseCanWriteCount, 10, tempCanWriteCount);
         this.tm2 = setTimeout(this.increaseAccuracy, 10, tempAccuracy);
 
         tempVisibleList[this.state.koreanUnicodeObj[this.state.fonts[this.state.currentIndex]]] = 1;
 
+        let tempB64Images = this.state.b64Images;
+        tempB64Images[this.getUnicode(this.state.currentIndex)] =
+            this.refs['canvas-' + this.getUnicode(this.state.currentIndex)].getCanvasBuffer();
+
         this.setState({
             currentIndex: this.state.currentIndex + 1,
             visibleList: tempVisibleList,
-            canWriteCount: tempCanWriteCount
+            canWriteCount: tempCanWriteCount,
+            b64Images: tempB64Images
         })
     }
 
@@ -260,12 +264,28 @@ export class Demo extends Component {
 
     // 데모 끝
     finishDemo() {
-        // request to processing server
-        // 빙글빙글
         this.setState({
             demoEndAlert: false,
             showLoading: true
-        })
+        });
+
+        let requestObj = {};
+        let unicodes = [];
+        for (let i = 0; i < 4; i++) {
+            let unicode = this.state.fonts.charCodeAt(i).toString(16);
+            unicodes.push(unicode.toUpperCase());
+        }
+
+        // S3 에 이미지들 업로드
+        // response 받기
+        promise('uploadHandwritesToS3', [this.state.b64Images])
+            .then((res) => {
+                if(res.result === 'ok'){
+                    Meteor.call('requestGenerate', unicodes, function(err,res){
+                        console.log(res)
+                    })
+                }
+            })
     }
 
     render() {
@@ -387,7 +407,7 @@ export class Demo extends Component {
                         labelColor='#333'
                         onTouchTap={this.goOnDemo}
                     />
-                    <br/><br/>
+                    <div style={{height: 5}}></div>
                     <Button
                         className='confirm-modal-button'
                         label="끝내고 결과를 보고싶어요!"

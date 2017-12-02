@@ -23,7 +23,7 @@ export class Canvas extends Component {
     ctx() {
         this.props.getContext(
             this.canvas().getContext('2d'),
-            this.canvas().getContext('2d').getImageData(0, 0, this.props.height, this.props.width)
+            this.canvas()
         );
         return this.canvas().getContext('2d');
     }
