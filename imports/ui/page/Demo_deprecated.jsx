@@ -186,7 +186,7 @@ export class Demo extends Component {
             .then(Meteor.call('updateUserCount'))
             .then(Meteor.call('getUserEmailById'))
             .then(Meteor.call('enqueue', unicodes))
-            
+
             .then(function () {
                 this.setState({showModal: true});
             }.bind(this))

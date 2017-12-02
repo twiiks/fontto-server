@@ -116,9 +116,9 @@ $default-header-height: 80px;
     .text-infos {
       margin-bottom: 20px;
       height: 1.5em;
-      font-size: 1.5em;
+      font-size: 1.2em;
       b {
-        font-size: 2em;
+        font-size: 1.7em;
       }
       .can-info {
         width: 50%;
@@ -134,11 +134,23 @@ $default-header-height: 80px;
       }
     }
   }
+}
 
-  @media (max-width: $mobile) {
-
+.floating-end-button{
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  height: 90px;
+  width: 90px;
+  background-color: #333;
+  border-radius: 45px;
+  color: white;
+  text-align: center;
+  display: table;
+  .text {
+    display: table-cell;
+    vertical-align: middle;
   }
-
 }
 
 .left-enter {

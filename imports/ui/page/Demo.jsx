@@ -6,6 +6,8 @@ import {promise} from "../../api/client/promise";
 
 import '../style/page/Demo.scss';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {Dialog} from "material-ui";
+import {Button} from "../component/Button";
 
 export class Demo extends Component {
     constructor(props) {
@@ -24,7 +26,9 @@ export class Demo extends Component {
             canWriteCount: 0,
             increasingCanWriteCount: 0,
             accuracy: 0,
-            increasingAccuracy: 0.0
+            increasingAccuracy: 0.0,
+            demoEndAlert: false,
+            showFloatingEndBtn: false,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -37,6 +41,8 @@ export class Demo extends Component {
         this.increaseCanWriteCount = this.increaseCanWriteCount.bind(this);
         this.setAccuracy = this.setAccuracy.bind(this);
         this.increaseAccuracy = this.increaseAccuracy.bind(this);
+        this.goOnDemo = this.goOnDemo.bind(this);
+        this.finishDemo = this.finishDemo.bind(this);
     }
 
     componentDidMount() {
@@ -164,6 +170,11 @@ export class Demo extends Component {
     }
 
     onNext() {
+        if (this.state.currentIndex === 3) {
+            this.setState({
+                demoEndAlert: true
+            })
+        }
         let tempVisibleList = this.state.visibleList;
         let tempCanWriteCount = this.state.canWriteCount;
         for (let i = 0; i < 36; i++) {
@@ -236,6 +247,18 @@ export class Demo extends Component {
         }
 
         return spanFonts
+    }
+
+    goOnDemo() {
+        this.setState({
+            demoEndAlert: false,
+            showFloatingEndBtn: true,
+        })
+    }
+
+    // 데모 끝
+    finishDemo() {
+
     }
 
     render() {
@@ -328,6 +351,54 @@ export class Demo extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Dialog
+                    modal={true}
+                    open={this.state.demoEndAlert}
+                    contentStyle={{width: '80%'}}
+                    autoDetectWindowHeight={false}>
+                    <div className='confirm-modal-head'>
+                        <div className='title'>
+                            더 써보기
+                        </div>
+                        <div className='desc'>
+                            더 써보시겠어요?
+                        </div>
+                    </div>
+                    <br/><br/><br/>
+                    <div className="confirm-desc">
+                        데모는 여기까지 쓰셨던 글자로 폰트를 만들어냅니다. 계속 쓰실 수는 있지만,
+                        이후에 쓰는 글자들은 학습에 반영되지 않습니다.
+                    </div>
+                    <br/>
+                    <Button
+                        className='confirm-modal-button'
+                        label="계속 써볼래요!"
+                        primary={true}
+                        fullWidth={true}
+                        backgroundColor='#fdfdfd'
+                        labelColor='#333'
+                        onTouchTap={this.goOnDemo}
+                    />
+                    <br/><br/>
+                    <Button
+                        className='confirm-modal-button'
+                        label="끝내고 결과를 보고싶어요!"
+                        fullWidth={true}
+                        backgroundColor='#333'
+                        labelColor='#fdfdfd'
+                        onTouchTap={this.finishDemo}
+                    />
+                </Dialog>
+
+                {this.state.showFloatingEndBtn ?
+                    <div className='floating-end-button'
+                         onTouchTap={this.finishDemo}>
+                        <div className='text'>
+                            끝내기
+                        </div>
+                    </div>
+                    : null}
             </div>
 
         );
