@@ -262,7 +262,10 @@ export class Demo extends Component {
     finishDemo() {
         // request to processing server
         // 빙글빙글
-        this.setState({showLoading: true})
+        this.setState({
+            demoEndAlert: false,
+            showLoading: true
+        })
     }
 
     render() {
