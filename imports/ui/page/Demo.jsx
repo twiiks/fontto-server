@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactLoading from 'react-loading';
 import {Header} from '../component/Header';
 import {Canvas} from '../component/Canvas';
 
@@ -29,6 +30,7 @@ export class Demo extends Component {
             increasingAccuracy: 0.0,
             demoEndAlert: false,
             showFloatingEndBtn: false,
+            showLoading: false,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -258,7 +260,9 @@ export class Demo extends Component {
 
     // 데모 끝
     finishDemo() {
-
+        // request to processing server
+        // 빙글빙글
+        this.setState({showLoading: true})
     }
 
     render() {
@@ -390,6 +394,18 @@ export class Demo extends Component {
                         onTouchTap={this.finishDemo}
                     />
                 </Dialog>
+
+                {this.state.showLoading ?
+                    <div className='loading-wrapper'>
+                        <ReactLoading className='loading'/>
+                        <div className='loading-desc-1'>
+                            폰트 생성중입니다...
+                        </div>
+                        <div className='loading-desc-2'>
+                            ( 2~3 분 소요됩니다. )
+                        </div>
+                    </div>
+                    : null}
 
                 {this.state.showFloatingEndBtn ?
                     <div className='floating-end-button'

@@ -23,6 +23,7 @@
     "react-animate-on-change": "^1.0.1",
     "react-animate-on-scroll": "^1.3.2",
     "react-dom": "^16.0.0",
+    "react-loading": "^1.0.2",
     "react-progressbar.js": "^0.2.0",
     "react-router-dom": "^4.2.2",
     "react-s-alert": "^1.3.2",

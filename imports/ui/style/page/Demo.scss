@@ -136,7 +136,7 @@ $default-header-height: 80px;
   }
 }
 
-.floating-end-button{
+.floating-end-button {
   position: fixed;
   right: 30px;
   bottom: 30px;
@@ -151,6 +151,39 @@ $default-header-height: 80px;
     display: table-cell;
     vertical-align: middle;
   }
+}
+
+.loading-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.9;
+  z-index: 1000;
+  .loading {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: -32px;
+  }
+  .loading-desc-1 {
+    position: absolute;
+    text-align: center;
+    color: white;
+    top: 50%;
+    width: 100%;
+    font-size: 1.6em;
+  }
+  .loading-desc-2 {
+    position: absolute;
+    text-align: center;
+    color: white;
+    top: calc(50% + 2.5em);
+    width: 100%;
+  }
+
 }
 
 .left-enter {
