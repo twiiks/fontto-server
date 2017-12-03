@@ -7,7 +7,7 @@ import {promise} from "../../api/client/promise";
 
 import '../style/page/Demo.scss';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Dialog} from "material-ui";
+import {Dialog, TextField} from "material-ui";
 import {Button} from "../component/Button";
 
 export class Demo extends Component {
@@ -32,6 +32,7 @@ export class Demo extends Component {
             demoEndAlert: false,
             showFloatingEndBtn: false,
             showLoading: false,
+            showResult: true,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -269,7 +270,6 @@ export class Demo extends Component {
             showLoading: true
         });
 
-        let requestObj = {};
         let unicodes = [];
         for (let i = 0; i < 4; i++) {
             let unicode = this.state.fonts.charCodeAt(i).toString(16);
@@ -280,8 +280,8 @@ export class Demo extends Component {
         // response 받기
         promise('uploadHandwritesToS3', [this.state.b64Images])
             .then((res) => {
-                if(res.result === 'ok'){
-                    Meteor.call('requestGenerate', unicodes, function(err,res){
+                if (res.result === 'ok') {
+                    Meteor.call('requestGenerate', unicodes, function (err, res) {
                         console.log(res)
                     })
                 }
@@ -419,7 +419,7 @@ export class Demo extends Component {
                 </Dialog>
 
                 {this.state.showLoading ?
-                    <div className='loading-wrapper'>
+                    <div className='dim-wrapper'>
                         <ReactLoading className='loading'/>
                         <div className='loading-desc-1'>
                             폰트 생성중입니다...
@@ -438,6 +438,47 @@ export class Demo extends Component {
                         </div>
                     </div>
                     : null}
+
+
+                <Dialog
+                    modal={true}
+                    open={this.state.showResult}
+                    contentStyle={{width: '80%'}}
+                    autoDetectWindowHeight={false}>
+                    <div className='confirm-modal-head'>
+                        <div className='title'>
+                            데모 결과
+                        </div>
+                        <div className='desc'>
+                            데모가 완료되었습니다! 결과를 확인해보세요.
+                        </div>
+                    </div>
+                    <br/><br/><br/>
+                    <div className="confirm-desc">
+                        데모에서는 약 20여자를 작성하실 수 있습니다. 힌트에 따라 글자를 작성해보세요!
+                    </div>
+                    <TextField
+                        hintText="감사합니다 열정끓는 세 청년이 다음달 런칭합니다."
+                        floatingLabelText="감사합니다 열정끓는 세 청년이 다음달 런칭합니다."
+                        floatingLabelFocusStyle={{color: '#999'}}
+                        underlineFocusStyle={{borderColor: '#999'}}
+                        style={{margin: '0 5%', width: '90%'}}
+                    />
+                    <br/>
+
+                    <div className="take-a-look">
+                        다른 유저들이 만든 글자를 구경해보세요!
+                    </div>
+                    <br/>
+                    <Button
+                        className='confirm-modal-button'
+                        label="첫 화면으로 돌아가기"
+                        fullWidth={true}
+                        backgroundColor='#333'
+                        labelColor='#fdfdfd'
+                        onTouchTap={this.finishDemo}
+                    />
+                </Dialog>
             </div>
 
         );

@@ -153,7 +153,7 @@ $default-header-height: 80px;
   }
 }
 
-.loading-wrapper {
+.dim-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -183,7 +183,16 @@ $default-header-height: 80px;
     top: calc(50% + 2.5em);
     width: 100%;
   }
+}
 
+.confirm-desc {
+  line-height: 1.4em;
+  font-weight:600;
+}
+
+.take-a-look {
+  font-weight:600;
+  margin-top: 20px;
 }
 
 .left-enter {
