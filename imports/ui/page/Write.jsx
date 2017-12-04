@@ -42,7 +42,7 @@ export class Write extends Component {
         this.setState({width: window.innerWidth, height: window.innerHeight});
     }
 
-    getContext(canvas, ctx, image) {
+    getContext(ctx, image) {
         let newContextObj = this.state.contextObj;
         newContextObj[ctx.canvas.id] = image;
 
