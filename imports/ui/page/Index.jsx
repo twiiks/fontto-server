@@ -156,14 +156,12 @@ export class Index extends Component {
                 <div className='section-1'>
                     <img className='main-picture' src='/image/main-picture.jpg'/>
                     <Sticky className='make-font-button-sticky' enabled={true} top={stickyTop}>
-                        <Button disabled={true} className='make-font-button' label='폰트만들기' />
+                        <Button disabled={true} className='make-font-button' label='폰트만들기'/>
                     </Sticky>
                     <Sticky className='demo-button-sticky' enabled={true} top={stickyTop}>
                         <Button className='make-font-button' label='체험해보기' onTouchTap={this.onDemo}/>
                     </Sticky>
-                    <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" duration={2}>
-                        <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
-                    </ScrollAnimation>
+                    <div className='main-desc-1'>나만의 폰트를<br/>손쉽게 만들어보세요.</div>
                 </div>
 
                 <div className='section-2'>

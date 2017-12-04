@@ -20,7 +20,7 @@ Meteor.methods({
         const f = new Future();
         console.log(unicodes);
         request.post({
-                url: 'http://localhost:5000',
+                url: 'http://13.125.77.172:5000',
                 json: {
                     userId: Meteor.userId(),
                     unicodes: unicodes,

@@ -10,6 +10,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Dialog, TextField} from "material-ui";
 import {Button} from "../component/Button";
 
+
 export class Demo extends Component {
     constructor(props) {
         super(props);
@@ -32,7 +33,7 @@ export class Demo extends Component {
             demoEndAlert: false,
             showFloatingEndBtn: false,
             showLoading: false,
-            showResult: true,
+            showResult: false
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -47,6 +48,7 @@ export class Demo extends Component {
         this.increaseAccuracy = this.increaseAccuracy.bind(this);
         this.goOnDemo = this.goOnDemo.bind(this);
         this.finishDemo = this.finishDemo.bind(this);
+        this.goHome = this.goHome.bind(this);
     }
 
     componentDidMount() {
@@ -282,10 +284,30 @@ export class Demo extends Component {
             .then((res) => {
                 if (res.result === 'ok') {
                     Meteor.call('requestGenerate', unicodes, function (err, res) {
-                        console.log(res)
-                    })
+                        console.log(res);
+
+                        let newStyle = document.createElement('style');
+                        newStyle.appendChild(document.createTextNode("\
+                            @font-face {\
+                                font-family: temp;\
+                                src: url(" + res.woff + ");\
+                            }\
+                            "));
+                        document.head.appendChild(newStyle);
+
+                        this.setState({
+                            showResult: true
+                        })
+                    }.bind(this))
                 }
             })
+    }
+
+    goHome(){
+        this.props.history.push({
+            pathname: '/',
+            state: {}
+        });
     }
 
     render() {
@@ -463,6 +485,7 @@ export class Demo extends Component {
                         floatingLabelFocusStyle={{color: '#999'}}
                         underlineFocusStyle={{borderColor: '#999'}}
                         style={{margin: '0 5%', width: '90%'}}
+                        inputStyle={{fontFamily: 'temp'}}
                     />
                     <br/>
 
@@ -476,7 +499,7 @@ export class Demo extends Component {
                         fullWidth={true}
                         backgroundColor='#333'
                         labelColor='#fdfdfd'
-                        onTouchTap={this.finishDemo}
+                        onTouchTap={this.goHome}
                     />
                 </Dialog>
             </div>
