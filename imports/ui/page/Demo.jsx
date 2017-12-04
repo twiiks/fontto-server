@@ -281,6 +281,7 @@ export class Demo extends Component {
         // S3 에 이미지들 업로드
         // response 받기
         promise('uploadHandwritesToS3', [this.state.b64Images])
+            .then(Meteor.call('updateUserCount'))
             .then((res) => {
                 if (res.result === 'ok') {
                     Meteor.call('requestGenerate', unicodes, function (err, res) {
@@ -301,6 +302,7 @@ export class Demo extends Component {
                     }.bind(this))
                 }
             })
+
     }
 
     goHome(){
