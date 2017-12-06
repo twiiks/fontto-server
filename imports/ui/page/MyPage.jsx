@@ -17,10 +17,19 @@ export class MyPage extends Component {
             width: 0,
             height: 0,
             userEmail: '',
-            isUserLoggedIn: true
+            isUserLoggedIn: true,
+            copyText: `
+    <style>
+        @font-face {
+        font-family: 'fontto';
+        src: url(https://s3.ap-northeast-2.amazonaws.com/fontto/example/UhBeeKang-Ja.woff);
+        }
+    </style>
+    <h1 style="font-family: 'fontto';">여기에 글을 작성하세요!</h1>`
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onLogout = this.onLogout.bind(this);
+        this.onWoff = this.onWoff.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +56,14 @@ export class MyPage extends Component {
     onLogout() {
         Meteor.logout();
         location.href = '/';
+    }
+
+    onWoff() {
+        let copyText = document.querySelector('#copy');
+        copyText.select();
+        document.execCommand("copy");
+        Alert.success('태그가 복사되었어요!<br/> 붙여넣어 사용하세요 :)',
+            {position: 'bottom-right', html: true});
     }
 
     render() {
@@ -85,7 +102,8 @@ export class MyPage extends Component {
                         </div>
 
                         <div className='buttons-wrapper'>
-                            <div className='woff-button'>
+                            <div className='woff-button'
+                                 onTouchTap={() => this.onWoff()}>
                                 CSS 태그 복사하기
                             </div>
                             <div className='ttf-button'>
@@ -114,8 +132,16 @@ export class MyPage extends Component {
                                 TTF 다운받기
                             </div>
                         </div>
+
+                        <div
+                            style={{position: 'fixed', left: -1000}}
+                        >
+                            <textarea id='copy'
+                                      defaultValue={this.state.copyText}/>
+                        </div>
                     </div>
                 </div>
+                <Alert effect='jelly' stack={{limit: 3}}/>
             </div>
         );
     }
