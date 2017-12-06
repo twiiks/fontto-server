@@ -33,7 +33,7 @@ export class Demo extends Component {
             demoEndAlert: false,
             showFloatingEndBtn: false,
             showLoading: false,
-            showResult: false
+            showResult: true,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -305,7 +305,7 @@ export class Demo extends Component {
 
     }
 
-    goHome(){
+    goHome() {
         this.props.history.push({
             pathname: '/',
             state: {}
@@ -481,18 +481,35 @@ export class Demo extends Component {
                     <div className="confirm-desc">
                         데모에서는 약 20여자를 작성하실 수 있습니다. 힌트에 따라 글자를 작성해보세요!
                     </div>
-                    <TextField
-                        hintText="감사합니다 열정끓는 세 청년이 다음달 런칭합니다."
-                        floatingLabelText="감사합니다 열정끓는 세 청년이 다음달 런칭합니다."
-                        floatingLabelFocusStyle={{color: '#999'}}
-                        underlineFocusStyle={{borderColor: '#999'}}
-                        style={{margin: '0 5%', width: '90%'}}
-                        inputStyle={{fontFamily: 'temp'}}
-                    />
+                    {/*<TextField*/}
+                    {/*hintText="감사합니다 열정끓는 세 청년이 다음달 런칭합니다."*/}
+                    {/*floatingLabelText="감사합니다 열정끓는 세 청년이 다음달 런칭합니다."*/}
+                    {/*floatingLabelFocusStyle={{color: '#999'}}*/}
+                    {/*underlineFocusStyle={{borderColor: '#999'}}*/}
+                    {/*style={{margin: '0 5%', width: '90%', height: '2em'}}*/}
+                    {/*inputStyle={{fontFamily: 'temp', fontSize: '2em'}}*/}
+                    {/*/>*/}
+                    <div className='hint'>
+                        감사합니다 열정끓는 세 청년이 다음달 런칭합니다.
+                    </div>
+
+                    <input type='text'
+                           height='2em'
+                           style={{
+                               fontSize: '2em',
+                               margin: '1% 3%',
+                               width: '94%',
+                               outline: 'none',
+                               borderLeft: '0',
+                               borderTop: '0',
+                               borderRight: '0',
+                           }}
+                    ></input>
+
                     <br/>
 
                     <div className="take-a-look">
-                        다른 유저들이 만든 글자를 구경해보세요!
+                        {/*다른 유저들이 만든 글자를 구경해보세요!*/}
                     </div>
                     <br/>
                     <Button
