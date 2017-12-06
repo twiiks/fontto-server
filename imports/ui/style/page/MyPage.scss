@@ -7,3 +7,58 @@ $tablet: 768px;
     visibility: hidden;
   }
 }
+
+.mypage-content {
+  margin: 100px 20px 0 20px;
+  padding: 10px;
+  .myfont {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .font-card {
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 3px #aaaaaa;
+    padding: 20px;
+    position: relative;
+    margin-bottom: 10px;
+    .font-title {
+      font-size: 1.2em;
+    }
+    .font-delete {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #ff4e48;
+      font-size: 2em;
+    }
+    .divider {
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+    .font-desc {
+      color: #999;
+    }
+    .buttons-wrapper {
+      position: relative;
+      padding: 5px;
+      height: 40px;
+      .woff-button {
+        position: absolute;
+        right: 120px;
+        background-color: #444444;
+        color: white;
+        padding: 10px;
+      }
+      .ttf-button {
+        position: absolute;
+        right: 0;
+        background-color: #444444;
+        color: white;
+        padding: 10px;
+      }
+    }
+  }
+}
