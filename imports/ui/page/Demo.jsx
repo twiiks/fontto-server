@@ -33,7 +33,7 @@ export class Demo extends Component {
             demoEndAlert: false,
             showFloatingEndBtn: false,
             showLoading: false,
-            showResult: true,
+            showResult: false,
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getContext = this.getContext.bind(this);
@@ -503,6 +503,7 @@ export class Demo extends Component {
                                borderLeft: '0',
                                borderTop: '0',
                                borderRight: '0',
+                               fontFamily: 'temp'
                            }}
                     ></input>
 
