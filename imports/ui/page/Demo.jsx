@@ -449,7 +449,7 @@ export class Demo extends Component {
                             폰트 생성중입니다...
                         </div>
                         <div className='loading-desc-2'>
-                            ( 2~3 분 소요됩니다. )
+                            ( 1분 이내에 완성됩니다! )
                         </div>
                     </div>
                     : null}

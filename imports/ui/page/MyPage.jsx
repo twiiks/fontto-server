@@ -22,7 +22,7 @@ export class MyPage extends Component {
     <style>
         @font-face {
         font-family: 'fontto';
-        src: url(https://s3.ap-northeast-2.amazonaws.com/fontto/example/UhBeeKang-Ja.woff);
+        src: url(https://s3.ap-northeast-2.amazonaws.com/fontto/development/outputs/ttf/banana/3/default.woff);
         }
     </style>
     <h1 style="font-family: 'fontto';">여기에 글을 작성하세요!</h1>`
