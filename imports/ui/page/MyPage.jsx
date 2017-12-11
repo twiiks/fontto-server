@@ -22,7 +22,7 @@ export class MyPage extends Component {
     <style>
         @font-face {
         font-family: 'fontto';
-        src: url(https://s3.ap-northeast-2.amazonaws.com/fontto/development/outputs/ttf/banana/3/default.woff);
+        src: url(https://s3.ap-northeast-2.amazonaws.com/fontto/development/outputs/ttf/banana/4/banana.woff);
         }
     </style>
     <h1 style="font-family: 'fontto';">여기에 글을 작성하세요!</h1>`
@@ -30,6 +30,7 @@ export class MyPage extends Component {
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onLogout = this.onLogout.bind(this);
         this.onWoff = this.onWoff.bind(this);
+        this.onTtf = this.onTtf.bind(this);
     }
 
     componentDidMount() {
@@ -64,6 +65,10 @@ export class MyPage extends Component {
         document.execCommand("copy");
         Alert.success('태그가 복사되었어요!<br/> 붙여넣어 사용하세요 :)',
             {position: 'bottom-right', html: true});
+    }
+
+    onTtf(){
+        location.href = 'https://s3.ap-northeast-2.amazonaws.com/fontto/development/outputs/ttf/banana/4/banana.ttf';
     }
 
     render() {
@@ -106,7 +111,8 @@ export class MyPage extends Component {
                                  onTouchTap={() => this.onWoff()}>
                                 CSS 태그 복사하기
                             </div>
-                            <div className='ttf-button'>
+                            <div className='ttf-button'
+                                 onTouchTap={() => this.onTtf()}>
                                 TTF 다운받기
                             </div>
                         </div>
