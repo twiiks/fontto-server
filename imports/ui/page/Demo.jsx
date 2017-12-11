@@ -273,7 +273,7 @@ export class Demo extends Component {
         });
 
         let unicodes = [];
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i <= this.state.currentIndex; i++) {
             let unicode = this.state.fonts.charCodeAt(i).toString(16);
             unicodes.push(unicode.toUpperCase());
         }

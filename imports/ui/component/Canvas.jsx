@@ -57,6 +57,7 @@ export class Canvas extends Component {
     }
 
     draw(e) {
+        this.ctx().globalCompositeOperation = "source-over";
         const ctx = this.ctx();
         if (this.state.isDrawing) {
             ctx.beginPath();
